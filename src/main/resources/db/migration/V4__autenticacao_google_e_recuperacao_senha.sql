@@ -11,7 +11,7 @@
 --      solicitação, com validade e uso únicos).
 -- ===================================================================
 
-ALTER TABLE T_USUARIO ALTER COLUMN password SET NULL;
+ALTER TABLE T_USUARIO ALTER COLUMN password DROP NOT NULL;
 
 ALTER TABLE T_USUARIO ADD COLUMN provider VARCHAR(20) NOT NULL DEFAULT 'LOCAL';
 ALTER TABLE T_USUARIO ADD COLUMN provider_id VARCHAR(100);

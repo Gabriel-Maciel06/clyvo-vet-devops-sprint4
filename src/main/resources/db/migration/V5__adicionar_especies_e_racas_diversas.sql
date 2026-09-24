@@ -8,7 +8,7 @@
 -- ===================================================================
 
 -- 1. Ampliar tamanho da coluna propensao_doenca para dados clínicos detalhados
-ALTER TABLE T_RACA ALTER COLUMN propensao_doenca VARCHAR(500);
+ALTER TABLE T_RACA ALTER COLUMN propensao_doenca SET DATA TYPE VARCHAR(500);
 
 -- 2. Inserção de Novas Espécies e Raças
 INSERT INTO T_RACA (nome, especie, propensao_doenca, expectativa_vida, cuidados_especiais) VALUES

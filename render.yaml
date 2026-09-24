@@ -1,0 +1,36 @@
+# Blueprint do Render: cria o banco e o serviço web numa tacada só.
+# Em outras plataformas (Railway, Fly, Koyeb) use o Dockerfile e defina
+# as mesmas variáveis de ambiente à mão.
+databases:
+  - name: clyvo-vet-db
+    databaseName: clyvodb
+    user: clyvo
+    plan: free
+
+services:
+  - type: web
+    name: clyvo-vet
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /login
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      # A URL que o provedor expoe vem como postgres://... e o driver JDBC nao
+      # aceita esse formato. Por isso passamos as partes e a aplicacao monta a
+      # URL JDBC em application-prod.properties.
+      - key: DB_HOST
+        fromDatabase: { name: clyvo-vet-db, property: host }
+      - key: DB_PORT
+        fromDatabase: { name: clyvo-vet-db, property: port }
+      - key: DB_NAME
+        fromDatabase: { name: clyvo-vet-db, property: database }
+      - key: DB_USER
+        fromDatabase: { name: clyvo-vet-db, property: user }
+      - key: DB_PASSWORD
+        fromDatabase: { name: clyvo-vet-db, property: password }
+      # URL publica do servico, usada no retorno do checkout. Preencher no painel
+      # depois do primeiro deploy, quando o endereco ja existir.
+      - key: APP_URL_BASE
+        sync: false

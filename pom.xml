@@ -89,6 +89,20 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!-- Flyway 10 separa o suporte por banco em modulos proprios: sem este
+             artefato a subida falha com "Unsupported Database: PostgreSQL". -->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-postgresql</artifactId>
+        </dependency>
+
+        <!-- PostgreSQL JDBC Driver: banco usado no deploy publico -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
         <!-- Oracle JDBC Driver -->
         <dependency>
             <groupId>com.oracle.database.jdbc</groupId>

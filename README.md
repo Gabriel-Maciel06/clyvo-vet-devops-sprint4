@@ -77,6 +77,58 @@ fica em `/h2-console` — JDBC URL `jdbc:h2:mem:clyvodb`, usuário `sa`, senha e
 
 ---
 
+## ☁️ Deploy (Aplicação Online)
+
+A aplicação roda em contêiner e usa **PostgreSQL** em produção. O mesmo conjunto
+de 15 migrações Flyway roda no H2 local e no Postgres do deploy, sem variação de SQL.
+
+### Variáveis de ambiente
+
+| Variável | Obrigatória | Padrão | Para que serve |
+| :--- | :--- | :--- | :--- |
+| `SPRING_PROFILES_ACTIVE` | sim | — | Precisa ser `prod` |
+| `DB_USER` | sim | — | Usuário do banco |
+| `DB_PASSWORD` | sim | — | Senha do banco |
+| `DB_URL` | ver nota | — | URL JDBC completa, ex.: `jdbc:postgresql://host:5432/clyvodb` |
+| `DB_HOST` / `DB_PORT` / `DB_NAME` | ver nota | `localhost` / `5432` / `clyvodb` | Alternativa a `DB_URL` |
+| `APP_URL_BASE` | não | vazio | Endereço público do serviço, usado no retorno do checkout |
+| `PORT` | não | `8095` | A maioria das plataformas injeta sozinha |
+
+> **Nota sobre o banco:** informe **ou** `DB_URL` **ou** o trio `DB_HOST`/`DB_PORT`/`DB_NAME`.
+> Provedores como o Render expõem a conexão no formato `postgres://...`, que o driver
+> JDBC não aceita; por isso a aplicação também monta a URL a partir das partes.
+
+### Subir com Docker
+
+```bash
+docker build -t clyvo-vet .
+
+docker run -p 8095:8095 \
+  -e SPRING_PROFILES_ACTIVE=prod \
+  -e DB_HOST=seu-host -e DB_NAME=clyvodb \
+  -e DB_USER=clyvo -e DB_PASSWORD=sua-senha \
+  clyvo-vet
+```
+
+### Render
+
+O arquivo [`render.yaml`](render.yaml) na raiz é um blueprint que cria o banco e o
+serviço web já conectados. Depois do primeiro deploy, preencha `APP_URL_BASE` no
+painel com a URL pública gerada.
+
+### Testar localmente contra um Postgres real
+
+```bash
+docker run -d --name clyvo-pg -p 55432:5432 \
+  -e POSTGRES_USER=clyvo -e POSTGRES_PASSWORD=clyvo -e POSTGRES_DB=clyvodb \
+  postgres:16-alpine
+
+SPRING_PROFILES_ACTIVE=prod DB_HOST=localhost DB_PORT=55432 \
+DB_NAME=clyvodb DB_USER=clyvo DB_PASSWORD=clyvo mvn spring-boot:run
+```
+
+---
+
 ## 🔐 Autenticação
 
 ### Autocadastro de tutor
