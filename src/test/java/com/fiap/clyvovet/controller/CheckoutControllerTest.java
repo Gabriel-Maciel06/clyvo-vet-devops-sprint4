@@ -143,4 +143,30 @@ class CheckoutControllerTest {
                         .param("codigoVoucher", "CLYVO-TESTE-123"))
                 .andExpect(status().isForbidden());
     }
+
+    @Test
+    @WithMockUser(username = "tutor", roles = "TUTOR")
+    @DisplayName("Endpoint de polling de status de pagamento exige que o agendamento pertença ao tutor autenticado (anti-IDOR)")
+    void statusPagamentoExigePropriedadeDoTutor() throws Exception {
+        var mvcResult = mockMvc.perform(post("/servicos/checkout").with(csrf())
+                        .param("petId", pet.getId().toString())
+                        .param("tipoServico", TipoServicoPreventivo.CONSULTA_PREVENTIVA.name())
+                        .param("metodoPagamento", "PIX"))
+                .andExpect(status().is3xxRedirection())
+                .andReturn();
+
+        String redirectedUrl = mvcResult.getResponse().getRedirectedUrl();
+        assert redirectedUrl != null;
+        String agendamentoId = redirectedUrl.substring(redirectedUrl.lastIndexOf('/') + 1);
+
+        // Tutor dono consegue consultar o status normalmente
+        mockMvc.perform(get("/servicos/pagamento/" + agendamentoId + "/status"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.pago").value(false));
+
+        // Outro usuário autenticado como TUTOR sem vínculo com este agendamento recebe 403
+        mockMvc.perform(get("/servicos/pagamento/" + agendamentoId + "/status")
+                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("outro_tutor").roles("TUTOR")))
+                .andExpect(status().isForbidden());
+    }
 }

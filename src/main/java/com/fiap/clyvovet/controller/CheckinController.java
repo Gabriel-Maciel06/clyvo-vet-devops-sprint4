@@ -35,7 +35,7 @@ public class CheckinController {
     public String formCheckin(@RequestParam(value = "petId", required = false) Long petId,
                               Authentication auth,
                               Model model) {
-        List<Pet> pets = petService.listarPorTutor(auth.getName());
+        List<Pet> pets = popularFormularioCheckin(model, auth.getName());
         CheckinDto dto = new CheckinDto();
         if (petId != null) {
             dto.setPetId(petId);
@@ -44,9 +44,6 @@ public class CheckinController {
         }
 
         model.addAttribute("checkinDto", dto);
-        model.addAttribute("pets", pets);
-        model.addAttribute("humores", HumorPet.values());
-        model.addAttribute("alimentacoes", AlimentacaoStatus.values());
         return "checkin/form";
     }
 
@@ -57,9 +54,7 @@ public class CheckinController {
                                    Model model,
                                    RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("pets", petService.listarPorTutor(auth.getName()));
-            model.addAttribute("humores", HumorPet.values());
-            model.addAttribute("alimentacoes", AlimentacaoStatus.values());
+            popularFormularioCheckin(model, auth.getName());
             return "checkin/form";
         }
 
@@ -80,11 +75,17 @@ public class CheckinController {
             return "redirect:/dashboard";
         } catch (Exception e) {
             model.addAttribute("errorMessage", "Erro ao registrar check-in: " + e.getMessage());
-            model.addAttribute("pets", petService.listarPorTutor(auth.getName()));
-            model.addAttribute("humores", HumorPet.values());
-            model.addAttribute("alimentacoes", AlimentacaoStatus.values());
+            popularFormularioCheckin(model, auth.getName());
             return "checkin/form";
         }
+    }
+
+    private List<Pet> popularFormularioCheckin(Model model, String username) {
+        List<Pet> pets = petService.listarPorTutor(username);
+        model.addAttribute("pets", pets);
+        model.addAttribute("humores", HumorPet.values());
+        model.addAttribute("alimentacoes", AlimentacaoStatus.values());
+        return pets;
     }
 
     @GetMapping("/recompensas")

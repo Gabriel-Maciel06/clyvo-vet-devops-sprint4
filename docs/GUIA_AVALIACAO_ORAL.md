@@ -1,6 +1,6 @@
 # Guia de Preparação para Avaliação Oral (Banca FIAP)
-**Projeto:** Clyvo Vet - Plataforma Web de Longevidade & Gamificação Pet
-**Tema:** Java Advanced - 3º Sprint
+**Projeto:** Clyvo Vet Web v2 - Plataforma HealthTech & Marketplace B2B2C de Longevidade Pet
+**Tema:** Java Advanced - 4ª Sprint (Entrega Final)
 
 ---
 

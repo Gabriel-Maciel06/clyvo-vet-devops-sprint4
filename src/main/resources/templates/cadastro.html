@@ -1,19 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criar Conta - Clyvo Vet</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/clyvo.css}">
-</head>
+<head th:replace="~{fragments/layout :: head('Criar Conta')}"></head>
 <body class="auth-body">
 
     <div class="auth-sheet auth-sheet-wide">
         <div class="auth-brand">
-            <div class="auth-brand-mark"><i class="bi bi-heart-pulse-fill"></i></div>
+            <div class="auth-brand-mark"><i class="bi bi-heart-pulse-fill" aria-hidden="true"></i></div>
             <div>
                 <h3 class="auth-title">Criar Conta na Clyvo<span>Vet</span></h3>
                 <p class="text-muted small mb-0">Cadastro de tutor - monitore a saúde e longevidade dos seus pets</p>
@@ -21,47 +13,47 @@
         </div>
 
         <div th:if="${errorMessage}" class="alert alert-danger small" role="alert">
-            <i class="bi bi-exclamation-circle-fill me-1"></i> <span th:text="${errorMessage}"></span>
+            <i class="bi bi-exclamation-circle-fill me-1" aria-hidden="true"></i> <span th:text="${errorMessage}"></span>
         </div>
 
         <form th:action="@{/cadastro}" th:object="${cadastroDto}" method="post">
             <div class="row g-3">
                 <div class="col-md-8">
-                    <label class="form-label">Nome completo *</label>
-                    <input type="text" class="form-control" th:field="*{nomeCompleto}" placeholder="Seu nome completo" required autofocus>
+                    <label for="nomeCompleto" class="form-label">Nome completo *</label>
+                    <input type="text" class="form-control" id="nomeCompleto" th:field="*{nomeCompleto}" placeholder="Seu nome completo" autocomplete="name" required autofocus>
                     <div class="text-danger small" th:if="${#fields.hasErrors('nomeCompleto')}" th:errors="*{nomeCompleto}"></div>
                 </div>
                 <div class="col-md-4">
-                    <label class="form-label">CPF *</label>
-                    <input type="text" class="form-control" th:field="*{cpf}" placeholder="000.000.000-00" required>
+                    <label for="cpf" class="form-label">CPF *</label>
+                    <input type="text" class="form-control" id="cpf" th:field="*{cpf}" placeholder="000.000.000-00" inputmode="numeric" required>
                     <div class="text-danger small" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></div>
                 </div>
 
                 <div class="col-md-6">
-                    <label class="form-label">E-mail *</label>
-                    <input type="email" class="form-control" th:field="*{email}" placeholder="voce@email.com" required>
+                    <label for="email" class="form-label">E-mail *</label>
+                    <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="voce@email.com" autocomplete="email" spellcheck="false" required>
                     <div class="text-danger small" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label">Telefone *</label>
-                    <input type="text" class="form-control" th:field="*{telefone}" placeholder="(11) 98765-4321" required>
+                    <label for="telefone" class="form-label">Telefone *</label>
+                    <input type="tel" class="form-control" id="telefone" th:field="*{telefone}" placeholder="(11) 98765-4321" autocomplete="tel" required>
                     <div class="text-danger small" th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}"></div>
                 </div>
 
                 <div class="col-md-12">
-                    <label class="form-label">Nome de usuário *</label>
-                    <input type="text" class="form-control" th:field="*{username}" placeholder="Como você vai entrar no sistema" required>
+                    <label for="username" class="form-label">Nome de usuário *</label>
+                    <input type="text" class="form-control" id="username" th:field="*{username}" placeholder="Como você vai entrar no sistema" autocomplete="username" spellcheck="false" required>
                     <div class="text-danger small" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
                 </div>
 
                 <div class="col-md-6">
-                    <label class="form-label">Senha *</label>
-                    <input type="password" class="form-control" th:field="*{senha}" placeholder="Mínimo 6 caracteres" required>
+                    <label for="senha" class="form-label">Senha *</label>
+                    <input type="password" class="form-control" id="senha" th:field="*{senha}" placeholder="Mínimo 6 caracteres" autocomplete="new-password" required>
                     <div class="text-danger small" th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}"></div>
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label">Confirmar senha *</label>
-                    <input type="password" class="form-control" th:field="*{confirmarSenha}" placeholder="Repita a senha" required>
+                    <label for="confirmarSenha" class="form-label">Confirmar senha *</label>
+                    <input type="password" class="form-control" id="confirmarSenha" th:field="*{confirmarSenha}" placeholder="Repita a senha" autocomplete="new-password" required>
                     <div class="text-danger small" th:if="${#fields.hasErrors('confirmarSenha')}" th:errors="*{confirmarSenha}"></div>
                 </div>
             </div>

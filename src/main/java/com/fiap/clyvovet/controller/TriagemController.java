@@ -92,14 +92,12 @@ public class TriagemController {
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/avaliar/{id}")
     public String formAvaliacao(@PathVariable("id") Long id, Model model) {
-        ConsultaTriagem triagem = triagemService.buscarPorId(id);
+        ConsultaTriagem triagem = popularContextoAvaliacao(model, id);
         AvaliacaoTriagemDto dto = new AvaliacaoTriagemDto();
         dto.setTriagemId(triagem.getId());
         dto.setPesoAferido(triagem.getPet().getPeso());
 
-        model.addAttribute("triagem", triagem);
         model.addAttribute("avaliacaoDto", dto);
-        model.addAttribute("checkins", checkinService.listarHistoricoPorPet(triagem.getPet().getId()));
         return "triagem/avaliar";
     }
 
@@ -111,9 +109,7 @@ public class TriagemController {
                                   Model model,
                                   RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            ConsultaTriagem triagem = triagemService.buscarPorId(dto.getTriagemId());
-            model.addAttribute("triagem", triagem);
-            model.addAttribute("checkins", checkinService.listarHistoricoPorPet(triagem.getPet().getId()));
+            popularContextoAvaliacao(model, dto.getTriagemId());
             return "triagem/avaliar";
         }
 
@@ -124,11 +120,16 @@ public class TriagemController {
                     concluida.getEscoreLongevidade() + "/100 (Risco " + concluida.getClassificacaoRisco().name() + ").");
             return "redirect:/triagem/fila";
         } catch (Exception e) {
-            ConsultaTriagem triagem = triagemService.buscarPorId(dto.getTriagemId());
-            model.addAttribute("triagem", triagem);
-            model.addAttribute("checkins", checkinService.listarHistoricoPorPet(triagem.getPet().getId()));
+            popularContextoAvaliacao(model, dto.getTriagemId());
             model.addAttribute("errorMessage", "Erro ao concluir triagem: " + e.getMessage());
             return "triagem/avaliar";
         }
+    }
+
+    private ConsultaTriagem popularContextoAvaliacao(Model model, Long triagemId) {
+        ConsultaTriagem triagem = triagemService.buscarPorId(triagemId);
+        model.addAttribute("triagem", triagem);
+        model.addAttribute("checkins", checkinService.listarHistoricoPorPet(triagem.getPet().getId()));
+        return triagem;
     }
 }

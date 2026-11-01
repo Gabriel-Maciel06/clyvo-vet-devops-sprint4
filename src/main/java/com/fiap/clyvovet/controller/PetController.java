@@ -55,8 +55,7 @@ public class PetController {
     @GetMapping("/novo")
     public String formNovoPet(Model model) {
         model.addAttribute("petDto", new PetDto());
-        model.addAttribute("racas", petService.listarRacas());
-        model.addAttribute("racasPorEspecie", petService.listarRacasAgrupadasPorEspecie());
+        popularCatalogoRacas(model);
         return "pets/form";
     }
 
@@ -72,8 +71,7 @@ public class PetController {
                 redirectAttributes.addFlashAttribute("errorMessage", msg);
                 return "redirect:/pets/" + petDto.getId() + "?tab=editar";
             }
-            model.addAttribute("racas", petService.listarRacas());
-            model.addAttribute("racasPorEspecie", petService.listarRacasAgrupadasPorEspecie());
+            popularCatalogoRacas(model);
             return "pets/form";
         }
 
@@ -93,8 +91,7 @@ public class PetController {
                 return "redirect:/pets/" + petDto.getId() + "?tab=editar";
             }
             model.addAttribute("errorMessage", "Erro ao salvar pet: " + e.getMessage());
-            model.addAttribute("racas", petService.listarRacas());
-            model.addAttribute("racasPorEspecie", petService.listarRacasAgrupadasPorEspecie());
+            popularCatalogoRacas(model);
             return "pets/form";
         }
     }
@@ -125,8 +122,7 @@ public class PetController {
 
         model.addAttribute("pet", pet);
         model.addAttribute("petDto", petDto);
-        model.addAttribute("racas", petService.listarRacas());
-        model.addAttribute("racasPorEspecie", petService.listarRacasAgrupadasPorEspecie());
+        popularCatalogoRacas(model);
         model.addAttribute("checkins", checkins);
         model.addAttribute("badges", badges);
         model.addAttribute("galeriaBadges", galeriaBadges);
@@ -135,6 +131,11 @@ public class PetController {
         model.addAttribute("protocolo", protocolo);
 
         return "pets/detalhes";
+    }
+
+    private void popularCatalogoRacas(Model model) {
+        model.addAttribute("racas", petService.listarRacas());
+        model.addAttribute("racasPorEspecie", petService.listarRacasAgrupadasPorEspecie());
     }
 
     @GetMapping("/{id}/editar")

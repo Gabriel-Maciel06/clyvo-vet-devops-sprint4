@@ -1,48 +1,68 @@
 <div align="center">
 
-# 🐾 Clyvo Vet Web v2
-### **Evolução pós-entrega: perfil de produção, cadastro/recuperação de senha e login com Google**
+# 🐾 Clyvo Vet Web v2 — Entrega Final (4ª Sprint Java Advanced FIAP)
+### **Plataforma HealthTech & Marketplace B2B2C de Medicina Veterinária Preventiva, Longevidade Pet e Suporte à Decisão Clínica (CDSS)**
 
 [![Java](https://img.shields.io/badge/Java-21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.4-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
 [![Spring Security](https://img.shields.io/badge/Spring%20Security-OAuth2%20%2B%20Form%20Login-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white)](https://spring.io/projects/spring-security)
-[![Flyway](https://img.shields.io/badge/Flyway-Database%20Migrations-CC0200?style=for-the-badge&logo=flyway&logoColor=white)](https://flywaydb.org/)
-[![Thymeleaf](https://img.shields.io/badge/Thymeleaf-Frontend%20MVC-005F0F?style=for-the-badge&logo=thymeleaf&logoColor=white)](https://www.thymeleaf.org/)
+[![Flyway](https://img.shields.io/badge/Flyway-15%20Migrations%20(3FN)-CC0200?style=for-the-badge&logo=flyway&logoColor=white)](https://flywaydb.org/)
+[![Tests](https://img.shields.io/badge/Tests-113%20JUnit%20%2B%20Playwright%20E2E-0d9488?style=for-the-badge&logo=junit5&logoColor=white)](#-testes-automatizados-113-testes--e2e-playwright)
 
 <p align="center">
-  <a href="#-sobre-o-projeto">Sobre</a> •
-  <a href="#-como-executar">Como Executar</a> •
-  <a href="#-autenticação">Autenticação</a> •
-  <a href="#-login-com-google-oauth2">Login com Google</a> •
-  <a href="#-perfis-de-execução">Perfis</a> •
-  <a href="#-fluxos-de-negócio-completos">Fluxos</a> •
-  <a href="#-testes-automatizados">Testes</a> •
-  <a href="docs/DOSSIE_TECNICO_AVALIACAO_CRITICA.md"><b>Dossiê Técnico para Críticos / Banca</b></a> •
-  <a href="#-estrutura-do-projeto">Estrutura</a>
+  <a href="#-narrativa-da-solução--proposta-de-valor">Narrativa</a> •
+  <a href="#-integração-multidisciplinar-fiap-4ª-sprint">Integração Multidisciplinar</a> •
+  <a href="#-como-executar-localmente">Como Executar</a> •
+  <a href="#-deploy-online-docker--render">Deploy Online</a> •
+  <a href="#-arquitetura--decisões-de-design">Arquitetura</a> •
+  <a href="#-fluxos-principais-do-sistema">Fluxos</a> •
+  <a href="#-testes-automatizados-113-testes--e2e-playwright">Testes</a> •
+  <a href="docs/ROTEIRO_GRAVACAO_VIDEO.md"><b>🎬 Roteiro do Vídeo (15 min)</b></a>
 </p>
 
 </div>
 
 ---
 
-## 📖 Sobre o Projeto
+## 📦 Artefatos Oficiais da Entrega Final (4ª Sprint FIAP)
 
-Este repositório é a continuação do **Clyvo Vet** (entregue como projeto da 3ª Sprint de Java Advanced - FIAP) — uma
-plataforma de medicina veterinária preventiva onde tutores fazem **check-ins diários** de seus pets (gerando streaks,
-pontos e descontos reais) e veterinários avaliam uma **fila de triagem preditiva** que calcula um Escore de
-Longevidade (0-100) cruzando idade, raça, sinais vitais e histórico de cuidados.
-
-A entrega original (avaliada) permanece intocada em [`clyvo-vet-web`](https://github.com/Gabriel-Maciel06/clyvo-vet-web).
-Este repositório evolui o mesmo código com três melhorias identificadas depois da entrega:
-
-1. **Autocadastro e recuperação de senha** — antes só existiam os dois usuários do seed.
-2. **Perfil de produção** — console H2, exceção de CSRF e credenciais de teste passam a existir *apenas* em
-   desenvolvimento.
-3. **Login e cadastro com Google (OAuth2)** — como alternativa ao usuário/senha local.
+| Requisito da Rubrica FIAP | Pontuação | Evidência / Documento no Repositório |
+| :--- | :---: | :--- |
+| **1. Demonstração Técnica da Solução** (Deploy, fluxos completos, Java 21 / Spring Boot 3.3.4, UI/UX) | **40 pts** | Aplicação Web Completa + [`Dockerfile`](Dockerfile) + [`render.yaml`](render.yaml) |
+| **2. Narrativa da Solução** (Proposta de valor, decisões de design, escolhas tecnológicas e originalidade) | **20 pts** | Seção [Narrativa da Solução](#-narrativa-da-solução--proposta-de-valor) + [`docs/DOSSIE_TECNICO_AVALIACAO_CRITICA.md`](docs/DOSSIE_TECNICO_AVALIACAO_CRITICA.md) |
+| **3. Integração Multidisciplinar** (Conexão com as demais disciplinas + scripts SQL, protótipos e evidências) | **20 pts** | [`docs/INTEGRACAO_MULTIDISCIPLINAR_SPRINT4.md`](docs/INTEGRACAO_MULTIDISCIPLINAR_SPRINT4.md) + [`docs/sql/SCHEMA_E_SEED_CONSOLIDADO_SPRINT4.sql`](docs/sql/SCHEMA_E_SEED_CONSOLIDADO_SPRINT4.sql) |
+| **4. Apresentação Oral e Comunicação em Equipe** (Roteiro estruturado para todos os integrantes em até 15 min) | **10 pts** | [`docs/ROTEIRO_GRAVACAO_VIDEO.md`](docs/ROTEIRO_GRAVACAO_VIDEO.md) + [`docs/GUIA_AVALIACAO_ORAL.md`](docs/GUIA_AVALIACAO_ORAL.md) |
+| **5. Organização da Entrega e Documentação** (Repositório estruturado, README completo e instruções claras) | **10 pts** | Este `README.md` + [`docs/PESQUISA_DE_MERCADO_CLYVO_VET.md`](docs/PESQUISA_DE_MERCADO_CLYVO_VET.md) |
 
 ---
 
-## 🚀 Como Executar
+## 💡 Narrativa da Solução & Proposta de Valor
+
+### O Problema Real
+No mercado veterinário brasileiro, a assistência clínica ainda é predominantemente **reativa e episódica**: mais de 70% dos tutores procuram atendimento apenas quando o animal já apresenta sintomas agudos, o que eleva drasticamente os custos hospitalares e reduz a longevidade do pet. Paralelamente, marketplaces veterinários tradicionais sofrem com a **desintermediação (fuga de transação no balcão)**: o tutor agenda pela plataforma, mas paga diretamente na clínica sem retenção nem histórico integrado.
+
+### Nossa Proposta e Originalidade
+O **Clyvo Vet Web v2** resolve ambos os problemas ao integrar três motores em uma única arquitetura:
+1. **Gamificação de Saúde Preventiva (`Clyvo Longevity Rewards`):** O tutor realiza **check-ins diários** de alimentação, humor, atividade física e medicação. A constância gera *streaks*, desbloqueia *badges* e converte *Clyvo Coins* em **descontos progressivos reais (5% a 20% OFF)** na rede credenciada, além de disparar alertas automáticos ao corpo clínico quando detecta apatia ou sintomas precoces.
+2. **Suporte à Decisão Clínica Multi-Espécie (`Dual-Engine CDSS`):** Na triagem veterinária, o sistema combina **Guardrails Clínicos Determinísticos** (diretrizes AAHA/WSAVA como *fail-safe* vital) com **Machine Learning Supervisionado (`CanineWellness-ML-v1.0`, ROC-AUC 0.9485)** e **Sistemas Especialistas de Fisiologia Comparada** para **9 classes biológicas** (cães, gatos, répteis ectotérmicos, peixes, aves, roedores, mustelídeos, aracnídeos e equinos), gerando explicabilidade XAI e síntese clínica no padrão **SOAP**.
+3. **Marketplace B2B2C com Split Paritário e Custódia Escrow:** O tutor contrata vacinas e check-ups diretamente in-app (via **PIX QR Code Dinâmico** ou **Stripe Checkout**). O algoritmo `SplitFinanceiroCalculator` aplica **co-financiamento paritário do desconto** com proteção de piso de repasse de **75% (*Floor Protection*)** para a clínica parceira e retém os valores em **custódia Escrow** até que o **Voucher Digital (`CLYVO-...`)** seja validado presencialmente na recepção.
+
+---
+
+## 🔗 Integração Multidisciplinar (FIAP 4ª Sprint)
+
+A documentação completa com diagramas e links diretos para os artefatos encontra-se em **[`docs/INTEGRACAO_MULTIDISCIPLINAR_SPRINT4.md`](docs/INTEGRACAO_MULTIDISCIPLINAR_SPRINT4.md)**:
+
+- **☕ Java Advanced:** Arquitetura em camadas com Spring Boot 3.3.4, Java 21, Spring Security 6 (Form Login BCrypt + Google OAuth2/OIDC + RBAC + proteção Anti-IDOR), Bean Validation, Strategy Pattern para motores clínicos e gateways de pagamento, e tratamento global de exceções (`@ControllerAdvice`).
+- **🗄️ Mastering Relational and Non-Relational Database:** Modelagem relacional em **3ª Forma Normal (15 tabelas)** gerida integralmente por **15 migrações Flyway (`V1` a `V15`)** com `ddl-auto=none`. Script consolidado com DDL e queries analíticas em [`docs/sql/SCHEMA_E_SEED_CONSOLIDADO_SPRINT4.sql`](docs/sql/SCHEMA_E_SEED_CONSOLIDADO_SPRINT4.sql).
+- **🧠 Disruptive Architectures (IA & ML):** Motor logístico multivariado de 21 features calibrado em 10.000 amostras clínicas (`CanineWellness-ML-v1.0`), explicabilidade XAI e motores de fisiologia comparada multi-espécie.
+- **☁️ DevOps Tools & Cloud Computing:** Build containerizado multi-stage em [`Dockerfile`](Dockerfile) (Eclipse Temurin JDK/JRE 21 Alpine), blueprint IaC em [`render.yaml`](render.yaml) com PostgreSQL gerenciado e segregação de perfis `dev` / `prod`.
+- **🎨 UX/UI Design & Front-End:** Design System clínico autoral (*Ficha Clínica*) em [`clyvo.css`](src/main/resources/static/css/clyvo.css), tipografia `Bricolage Grotesque` + `IBM Plex Sans` com `tabular-nums`, fragmentos Thymeleaf reutilizáveis sem repetição (DRY) e acessibilidade WCAG/ARIA.
+- **🛡️ Compliance & Quality Assurance:** **113 testes automatizados** (JUnit 5 + MockMvc + Spring Security Test) e auditoria E2E no navegador com **Playwright**.
+
+---
+
+## 🚀 Como Executar Localmente
 
 ### Pré-requisitos
 | Ferramenta | Versão |
@@ -50,341 +70,169 @@ Este repositório evolui o mesmo código com três melhorias identificadas depoi
 | **JDK** | 21 |
 | **Maven** | 3.8+ |
 
-Nada além disso é obrigatório: o banco (H2 em memória) e as migrações do Flyway sobem sozinhos, e tanto o envio de
-e-mail quanto o login com Google são **opcionais** — sem configurá-los, a aplicação funciona normalmente com login
-local e a recuperação de senha registra o link no log em vez de enviar e-mail (ver [Autenticação](#-autenticação)).
+O banco H2 em memória e as 15 migrações do Flyway sobem automaticamente sem necessidade de configuração externa.
 
 ### Passo a passo
 ```bash
 git clone https://github.com/Gabriel-Maciel06/clyvo-vet-web-v2.git
 cd clyvo-vet-web-v2
 
-mvn test              # opcional: roda os 31 testes automatizados
-mvn spring-boot:run   # sobe em http://localhost:8095
+mvn clean test        # Executa os 113 testes automatizados (100% verdes)
+mvn spring-boot:run   # Inicia a aplicação em http://localhost:8095
 ```
 
-> Mais de um JDK instalado? Aponte o Maven para o 21 antes de rodar:
-> `export JAVA_HOME=$(/usr/libexec/java_home -v 21)` (macOS) ou defina `JAVA_HOME` no Windows/Linux.
+> Caso possua múltiplos JDKs instalados no macOS:
+> `export JAVA_HOME=$(/usr/libexec/java_home -v 21)`
 
-A porta muda com a variável `PORT` (ex.: `PORT=8080 mvn spring-boot:run`). O console H2 (apenas em desenvolvimento)
-fica em `/h2-console` — JDBC URL `jdbc:h2:mem:clyvodb`, usuário `sa`, senha em branco.
-
-### Credenciais do seed
-| Perfil | Usuário | Senha |
-| :--- | :--- | :--- |
-| Veterinário (`ROLE_ADMIN`) | `admin` | `admin123` |
-| Tutor (`ROLE_TUTOR`) | `tutor` | `tutor123` |
+### Credenciais de Acesso (Seed Inicial)
+| Perfil | Usuário | Senha | Permissões Principais |
+| :--- | :--- | :--- | :--- |
+| **Tutor (`ROLE_TUTOR`)** | `tutor` | `tutor123` | Dashboard Tutor, Meus Pets, Check-in Diário, Clyvo Rewards, Solicitar Triagem, Marketplace In-App, Pagamento PIX e Vouchers |
+| **Veterinário (`ROLE_ADMIN`)** | `admin` | `admin123` | Central Médica, Alertas Clínicos, Fila de Triagem IA, Avaliação Clínica Dual-Engine e Validação/Baixa de Vouchers na Clínica |
 
 ---
 
-## ☁️ Deploy (Aplicação Online)
+## ☁️ Deploy Online (Docker & Render)
 
-A aplicação roda em contêiner e usa **PostgreSQL** em produção. O mesmo conjunto
-de 15 migrações Flyway roda no H2 local e no Postgres do deploy, sem variação de SQL.
+A aplicação é empacotada em contêiner Docker multi-stage e utiliza **PostgreSQL** em produção (`SPRING_PROFILES_ACTIVE=prod`). As mesmas 15 migrações Flyway rodam no H2 local e no PostgreSQL em nuvem.
 
-### Variáveis de ambiente
+### Variáveis de Ambiente de Produção
 
-| Variável | Obrigatória | Padrão | Para que serve |
+| Variável | Obrigatória | Padrão | Finalidade |
 | :--- | :--- | :--- | :--- |
-| `SPRING_PROFILES_ACTIVE` | sim | — | Precisa ser `prod` |
-| `DB_USER` | sim | — | Usuário do banco |
-| `DB_PASSWORD` | sim | — | Senha do banco |
-| `DB_URL` | ver nota | — | URL JDBC completa, ex.: `jdbc:postgresql://host:5432/clyvodb` |
-| `DB_HOST` / `DB_PORT` / `DB_NAME` | ver nota | `localhost` / `5432` / `clyvodb` | Alternativa a `DB_URL` |
-| `APP_URL_BASE` | não | vazio | Endereço público do serviço, usado no retorno do checkout |
-| `PORT` | não | `8095` | A maioria das plataformas injeta sozinha |
+| `SPRING_PROFILES_ACTIVE` | Sim | — | Definir como `prod` em produção |
+| `DB_USER` / `DB_PASSWORD` | Sim | — | Credenciais do banco PostgreSQL |
+| `DB_URL` | Ver nota | — | URL JDBC ou `postgres://` (normalizada por `DataSourceUrlNormalizerConfig`) |
+| `DB_HOST` / `DB_PORT` / `DB_NAME` | Ver nota | `localhost` / `5432` / `clyvodb` | Alternativa modular a `DB_URL` |
+| `APP_URL_BASE` | Não | `http://localhost:8095` | URL pública base para callbacks OAuth2, Stripe e links de e-mail |
+| `PORT` | Não | `8095` | Porta HTTP injetada pelo provedor de nuvem |
 
-> **Nota sobre o banco:** informe **ou** `DB_URL` **ou** o trio `DB_HOST`/`DB_PORT`/`DB_NAME`.
-> Provedores como o Render expõem a conexão no formato `postgres://...`, que o driver
-> JDBC não aceita; por isso a aplicação também monta a URL a partir das partes.
-
-### Subir com Docker
-
+### Executar com Docker
 ```bash
-docker build -t clyvo-vet .
+docker build -t clyvo-vet-web-v2 .
 
 docker run -p 8095:8095 \
   -e SPRING_PROFILES_ACTIVE=prod \
   -e DB_HOST=seu-host -e DB_NAME=clyvodb \
   -e DB_USER=clyvo -e DB_PASSWORD=sua-senha \
-  clyvo-vet
+  clyvo-vet-web-v2
 ```
 
-### Render
-
-O arquivo [`render.yaml`](render.yaml) na raiz é um blueprint que cria o banco e o
-serviço web já conectados. Depois do primeiro deploy, preencha `APP_URL_BASE` no
-painel com a URL pública gerada.
-
-### Testar localmente contra um Postgres real
-
-```bash
-docker run -d --name clyvo-pg -p 55432:5432 \
-  -e POSTGRES_USER=clyvo -e POSTGRES_PASSWORD=clyvo -e POSTGRES_DB=clyvodb \
-  postgres:16-alpine
-
-SPRING_PROFILES_ACTIVE=prod DB_HOST=localhost DB_PORT=55432 \
-DB_NAME=clyvodb DB_USER=clyvo DB_PASSWORD=clyvo mvn spring-boot:run
-```
+### Deploy Automatizado no Render (`render.yaml`)
+O arquivo [`render.yaml`](render.yaml) na raiz configura o Blueprint completo (serviço web Docker + banco PostgreSQL `clyvo-db`) pronto para deploy contínuo.
 
 ---
 
-## 🔐 Autenticação
+## 🏛️ Arquitetura & Decisões de Design
 
-### Autocadastro de tutor
-Tela `/cadastro` — cria, na mesma transação, a conta de acesso (`T_USUARIO`, senha em BCrypt) e o registro de tutor
-(`T_TUTOR`). Sempre cria `ROLE_TUTOR`; contas de veterinário continuam existindo só via seed/administração direta,
-por segurança. Valida CPF, e-mail e usuário duplicados (`UsuarioService.cadastrarTutor`).
+### 1. Segurança Híbrida (`SecurityConfig`)
+- **Login Local + Recuperação de Senha:** Autenticação via `DaoAuthenticationProvider` com senhas em `BCryptPasswordEncoder`. Recuperação de senha via token único de 30 minutos (`T_TOKEN_RECUPERACAO_SENHA`) sem enumeração de usuários.
+- **Login Social com Google OAuth2 / OIDC:** Provisionamento automático em `CustomOAuth2UserService` e `CustomOidcUserService`. Novos usuários recebem CPF provisório e são guiados ao fluxo `/perfil/completar-cadastro`. No ambiente local sem chaves de API do Google Cloud, o sistema disponibiliza um **Modo Demo OAuth2 (`/login/google-demo`)** para avaliação completa do fluxo.
+- **Proteção RBAC e Anti-IDOR:** Segregação estrita entre `ROLE_TUTOR` e `ROLE_ADMIN` na `SecurityFilterChain`, em `@PreAuthorize` e na camada de domínio (`PetService.buscarPorIdAutorizado` e `CheckoutController.buscarAgendamentoAutorizado`), impedindo que um tutor acesse pets, pagamentos ou vouchers de terceiros.
 
-### Recuperação de senha
-Fluxo clássico de "esqueci minha senha", em `RecuperacaoSenhaService`:
-1. `/recuperar-senha` recebe o e-mail e **sempre** responde a mesma mensagem, exista ou não a conta — evita que
-   alguém descubra quais e-mails estão cadastrados.
-2. Um token de uso único (UUID), válido por **30 minutos**, é salvo em `T_TOKEN_RECUPERACAO_SENHA` e enviado por
-   e-mail com o link `/redefinir-senha?token=...`.
-3. `/redefinir-senha` valida o token (não expirado, não usado) e troca a senha (BCrypt).
-
-**Sem precisar configurar nada em desenvolvimento:** se as variáveis de e-mail não existirem, o Spring Boot não cria
-o `JavaMailSender` e o `NotificacaoEmailService` registra o link no **log da aplicação** em vez de falhar — é assim
-que este projeto foi testado. Para enviar e-mails de verdade, defina (ex.: com uma conta Gmail e uma
-[senha de app](https://myaccount.google.com/apppasswords)):
-```bash
-export SPRING_MAIL_HOST=smtp.gmail.com
-export SPRING_MAIL_PORT=587
-export SPRING_MAIL_USERNAME=seu-email@gmail.com
-export SPRING_MAIL_PASSWORD=sua-senha-de-app
-```
-Contas criadas via Google (ver abaixo) não têm senha local — pedir recuperação de senha para elas não gera token.
-
----
-
-## 🌐 Login com Google (OAuth2)
-
-Botão "Continuar com Google" na tela de login. **Só aparece quando configurado** — sem as variáveis de ambiente
-abaixo, a aplicação sobe normalmente com login local apenas (nada quebra por falta de credenciais do Google).
-
-### 1. Criar as credenciais no Google Cloud Console
-1. Acesse [console.cloud.google.com](https://console.cloud.google.com/) e crie um projeto (ou use um existente).
-2. Menu **APIs e Serviços → Tela de consentimento OAuth**: tipo *Externo*, preencha nome do app e e-mail; em
-   *Escopos*, adicione `email`, `profile` e `openid`. Em desenvolvimento, adicione seu e-mail em *Usuários de teste*.
-3. Menu **APIs e Serviços → Credenciais → Criar Credenciais → ID do cliente OAuth**:
-   - Tipo de aplicativo: **Aplicativo da Web**.
-   - **Origens JavaScript autorizadas:** `http://localhost:8095`
-   - **URIs de redirecionamento autorizados:** `http://localhost:8095/login/oauth2/code/google`
-     (em produção, troque pelo domínio real, ex.: `https://seu-dominio.com/login/oauth2/code/google`).
-4. Copie o **Client ID** e o **Client Secret** gerados.
-
-### 2. Configurar a aplicação
-```bash
-export GOOGLE_CLIENT_ID=seu-client-id.apps.googleusercontent.com
-export GOOGLE_CLIENT_SECRET=seu-client-secret
-mvn spring-boot:run
-```
-O botão do Google aparece na tela de login e `/oauth2/authorization/google` inicia o fluxo padrão do Spring Security.
-
-### 3. O que acontece no primeiro login
-`CustomOAuth2UserService` decide entre duas situações, a partir do e-mail devolvido pelo Google:
-- **E-mail já tem conta local** (ex.: alguém que se cadastrou pelo formulário): a conta existente passa a aceitar
-  login também via Google (o Google não substitui nem apaga a senha local).
-- **E-mail novo:** cria `Usuario` (`ROLE_TUTOR`, sem senha) e `Tutor`. Como o Google não fornece CPF e ele é a chave
-  primária de `T_TUTOR`, um **CPF provisório** é atribuído (`GOOGLE` + ID) e o tutor é levado a
-  `/perfil/completar-cadastro`, onde informa o CPF e telefone reais antes de poder cadastrar pets
-  (`PerfilService.completarCadastro`).
-
-Essa lógica é validada por testes de unidade em `CustomOAuth2UserServiceTest` e `PerfilServiceTest`, sem depender de
-credenciais reais — então o comportamento pode ser conferido com `mvn test` mesmo sem configurar o Google.
-
----
-
-## 🏭 Perfis de Execução
-
-| | Desenvolvimento (padrão) | Produção (`SPRING_PROFILES_ACTIVE=prod`) |
-| :--- | :--- | :--- |
-| Console H2 (`/h2-console`) | Habilitado | **Desabilitado** (nem exposto pela autoconfiguração) |
-| Exceção de CSRF | Só para `/h2-console/**` | **Nenhuma** |
-| Credenciais de teste na tela de login | Aparecem | **Ocultas** |
-| Banco de dados | H2 em memória | Definido por `DB_URL`/`DB_USER`/`DB_PASSWORD`/`DB_DRIVER` |
-| `spring.jpa.show-sql` | `true` | `false` |
-
-```bash
-export SPRING_PROFILES_ACTIVE=prod
-export DB_URL=jdbc:oracle:thin:@//host:1521/SERVICE
-export DB_USER=usuario_do_banco
-export DB_PASSWORD=senha_do_banco
-export APP_URL_BASE=https://seu-dominio.com   # usado nos links de e-mail
-java -jar target/clyvo-vet-web-1.0.0.jar
-```
-A troca de perfil é feita inteiramente por `application-prod.properties` sobrescrevendo `application.properties` —
-ver `SecurityConfig` (a flag `app.h2-console.permitir` decide, na mesma classe, se o console H2 é liberado *e* se a
-exceção de CSRF existe, então em produção nenhum dos dois fica ativo).
-
----
-
-## 👤 Controle de Acesso
-
-| Perfil | Rotas |
-| :--- | :--- |
-| **Veterinário** (`ROLE_ADMIN`) | `/triagem/fila`, `/triagem/avaliar/{id}` |
-| **Tutor** (`ROLE_TUTOR`) | `/pets/novo`, `/pets/salvar`, `/checkin/**`, `/triagem/solicitar`, `/perfil/**` |
-| **Público** | `/login`, `/cadastro`, `/recuperar-senha`, `/redefinir-senha`, `/access-denied` |
-
-Um tutor não acessa rotas de veterinário (e vice-versa) — recebe **403** e a página *Acesso Negado*. A camada de
-serviço também impede que um tutor veja ou manipule **pets de outro tutor** trocando o ID na URL/formulário
-(`PetService.validarPropriedade`).
-
----
-
-## 🔄 Fluxos de Negócio Completos
-
-### 🎮 Fluxo 1 — Check-in Diário, Streak e Recompensas (Tutor)
-`CheckinController` → `CheckinService.registrarCheckin()`
-1. Valida que o pet pertence ao tutor logado e que ainda não houve check-in hoje.
-2. Detecta **alerta clínico** (humor apático/dor, pouco apetite ou sintomas descritos).
-3. Pontua: 10 Clyvo Coins base, +5 com 30 min ou mais de atividade, +5 com medicação administrada.
-4. Atualiza a **recompensa do tutor** (`RecompensaTutor`): streak, pontos, nível e desconto.
-5. Desbloqueia **badges** e registra o evento na **linha do tempo clínica**.
-
-| Nível | Critério (streak **ou** pontos) | Desconto |
-| :--- | :--- | :---: |
-| Bronze | padrão | 5% |
-| Prata | 7 dias ou 100 pts | 10% |
-| Ouro | 14 dias ou 250 pts | 15% |
-| Diamante | 30 dias ou 500 pts | 20% |
-
-### 🩺 Fluxo 2 — Triagem Preventiva e Longevidade (Arquitetura Dual-Engine: ML + Guardrails)
-`TriagemController` → `TriagemService` → `PredictiveMlEngine`
-
-O sistema implementa uma **Arquitetura de Decisão Híbrida (Dual-Engine Architecture)** com separação estrita entre segurança fisiológica vital e inferência estatística de longevidade:
-
-1. **Camada 1: Guardrails Clínicos Determinísticos (Diretrizes AAHA / WSAVA):**
-   - Regras médicas de emergência inegociáveis. Avalia hipertermia ($T > 39.3^\circ\text{C}$), hipotermia ($T < 37.8^\circ\text{C}$), taquicardia/bradicardia severa.
-   - Atua como *fail-safe override*: parâmetros vitais críticos forçam imediatamente a classificação de risco elevado, impedindo falsos negativos de modelos estatísticos em emergências agudas.
-
-2. **Camada 2: Motor de Machine Learning Probabilístico Multivariado (`PredictiveMlEngine`):**
-   - Modelo calibrado sobre o **Canine Wellness Classification Dataset** (10.000 amostras clínicas, 21 features do Kaggle: `aaronisomaisom3/canine-wellness-dataset-synthetic-10k-samples`).
-   - Métricas de Validação: **ROC-AUC: 0.9485**, **Acurácia: 87.24%**, **Recall: 94.92%**, **F1: 0.9169**.
-   - Calcula a **Probabilidade Multivariada de Higidez $P(\text{Higidez} \mid \vec{x})$** via normalização Z-Score e função sigmóide logística $z = \beta_0 + \sum \beta_i \hat{x}_i$, ponderada por idade, peso/porte, sono, atividade aeróbica, visitas veterinárias e adesão profilática.
-   - Computa o **Escore Preditivo de Longevidade (0 a 100)** e classificação de risco (`BAIXO`, `MODERADO`, `ALTO`).
-
-3. **Camada 3: Explicabilidade Algorítmica (XAI / SHAP-like) & Síntese SOAP:**
-   - Decompõe a inferência em vetores de atribuição de features (ex.: `[+14 pts Fase Adulta Jovem]`, `[+8 pts Consultas Regulares]`, `[-15 pts Predisposição Fenotípica]`).
-   - Mapeia riscos específicos (displasia coxofemoral em grandes portes sem condroprotetor, estresse térmico em braquicefálicos).
-   - Gera síntese clínica estruturada no padrão médico veterinário **SOAP** (Subjetivo, Objetivo, Avaliação, Plano) no prontuário.
-
+### 2. Arquitetura Dual-Engine CDSS (Padrão Strategy)
 ```mermaid
 graph TD
-    A[Tutor: Solicitação de Triagem] --> B[Fila Médica ROLE_ADMIN]
-    B --> C[Veterinário: Exame Físico & Biometria]
-    C --> D{Avaliação Dual-Engine}
-    D -->|Camada 1: Guardrails AAHA/WSAVA| E[Segurança Vital: Febre / Hipotermia / Arritmia]
-    D -->|Camada 2: PredictiveMlEngine| F[ML 10k Amostras: P-Higidez & Escore Longevidade]
-    E --> G[Fusão & Fail-Safe Override]
-    F --> G
-    G --> H[Explicabilidade XAI + Síntese SOAP]
-    H --> I[Prontuário Eletrônico & Linha do Tempo]
+    A["Tutor: Solicitação de Triagem"] --> B["Fila Médica (ROLE_ADMIN)"]
+    B --> C["Veterinário: Exame Físico & Sinais Vitais"]
+    C --> D{"Roteador Strategy por Espécie"}
+    D -->|"CANINA"| E["CaninePredictiveMlEngine (ML 21 features, ROC-AUC 0.9485)"]
+    D -->|"FELINA"| F["FelinePhysiologyEngine (Diretrizes AAFP/ISFM)"]
+    D -->|"REPTIL / PEIXE / AVE / EXÓTICOS"| G["Motores Especialistas de Fisiologia Comparada"]
+    E --> H["Guardrails Clínicos Vitais (Fail-Safe Override AAHA/WSAVA)"]
+    F --> H
+    G --> H
+    H --> I["Explicabilidade XAI + Síntese Estruturada SOAP"]
+    I --> J["Prontuário Eletrônico & Linha do Tempo Clínica"]
 ```
 
----
-
-### 🏬 Modelagem Relacional do Two-Sided Marketplace (14 Entidades em 3FN)
-
-O ecossistema modela formalmente a intermediação entre tutores e clínicas credenciadas, superando prontuários isolados com transações in-app, split contábil e custódia (escrow):
-
+### 3. Modelagem Relacional 3FN do Marketplace e Split Bipartite
 ```mermaid
 erDiagram
-    T_CLINICA ||--o{ T_SERVICO : "cadastra catalogo"
-    T_CLINICA ||--o{ T_AGENDAMENTO : "recebe reserva"
-    T_CLINICA ||--o{ T_COMISSAO : "recebe repasse liquido"
-    
+    T_CLINICA ||--o{ T_SERVICO : "catalogo"
+    T_CLINICA ||--o{ T_AGENDAMENTO_SERVICO : "atende"
+    T_CLINICA ||--o{ T_COMISSAO : "recebe_repasse"
     T_TUTOR ||--o{ T_PET : "possui"
-    T_TUTOR ||--o{ T_AGENDAMENTO : "solicita"
-    T_PET ||--o{ T_AGENDAMENTO : "paciente"
-    T_SERVICO ||--o{ T_AGENDAMENTO : "tipo_procedimento"
-    
-    T_AGENDAMENTO ||--|| T_TRANSACAO : "gera cobranca in-app"
-    T_TRANSACAO ||--|| T_COMISSAO : "split 15% & custodia escrow"
-    
+    T_TUTOR ||--o{ T_AGENDAMENTO_SERVICO : "contrata"
+    T_PET ||--o{ T_AGENDAMENTO_SERVICO : "paciente"
+    T_AGENDAMENTO_SERVICO ||--|| T_TRANSACAO : "pagamento_in_app"
+    T_TRANSACAO ||--|| T_COMISSAO : "split_e_escrow"
     T_USUARIO ||--o| T_TUTOR : "autenticacao"
     T_PET ||--o{ T_CHECKIN_DIARIO : "monitoramento"
-    T_PET ||--o{ T_BADGE_CONQUISTA : "gamificacao"
-    T_PET ||--o{ T_CONSULTA_TRIAGEM : "exame_fisico"
-    T_PET ||--o{ T_HISTORICO_CLINICO : "prontuario"
+    T_PET ||--o{ T_BADGE_CONQUISTA : "conquistas"
+    T_PET ||--o{ T_CONSULTA_TRIAGEM : "triagem_ia"
+    T_PET ||--o{ T_HISTORICO_CLINICO : "timeline"
     T_TUTOR ||--o| T_RECOMPENSA_TUTOR : "fidelidade"
-    T_RACA ||--o{ T_PET : "propensao_genetica"
+    T_RACA ||--o{ T_PET : "biometria"
 ```
-
-1. **`T_CLINICA`**: Credenciamento B2B com CNPJ, Razão Social, CRMV do responsável, chave PIX de liquidação e taxa de comissão.
-2. **`T_SERVICO`**: Catálogo de procedimentos profiláticos e preventivos de cada clínica com preço base, duração e elegibilidade a descontos.
-3. **`T_AGENDAMENTO`**: Contrato de intermediação com status (`SOLICITADO`, `CONFIRMADO`, `REALIZADO`, `CANCELADO`).
-4. **`T_TRANSACAO`**: Registro financeiro in-app retido pelo gateway (PIX/Cartão, abatimento de pontos, voucher e QR Code).
-5. **`T_COMISSAO`**: Livro-razão contábil do split retendo os **15% de take-rate** na fonte em custódia (`RETIDO_ESCROW`) e liberando o repasse líquido após o atendimento (`LIBERADO_APOS_ATENDIMENTO` $\rightarrow$ `PAGO_LIQUIDADO`).
 
 ---
 
-## 🧪 Testes Automatizados
+## 🔄 Fluxos Principais do Sistema
+
+1. **Fluxo 1 — Gestão Biométrica Multi-Espécie e Protocolo de Longevidade (`/pets`, `/pets/novo`, `/pets/{id}`):**
+   - Catálogo com **9 classes biológicas** (Canina, Felina, Réptil, Peixe, Ave, Roedor, Mustelídeo, Aracnídeo e Equina), recomendação dinâmica de faixa de peso saudável, cálculo de idade humana equivalente e calendário vacinal/preventivo automatizado.
+2. **Fluxo 2 — Check-in Diário Gamificado e Alertas Precoces (`/checkin/novo`, `/checkin/recompensas`):**
+   - Registro diário de hábitos (+10 coins base, +5 exercício $\ge 30$ min, +5 medicação), progressão automática de nível (**Bronze 5%**, **Prata 10%**, **Ouro 15%**, **Diamante 20%**) e geração imediata de alerta clínico na central médica caso haja sintomas ou apatia.
+3. **Fluxo 3 — Marketplace Preventivo, Split com Subsídio Paritário e PIX Sandbox (`/servicos`, `/servicos/checkout`, `/servicos/pagamento/{id}`, `/servicos/voucher/{id}`):**
+   - Contratação in-app com desconto de fidelidade, cálculo transparente de repasse protegido (piso 75%) e comissão Clyvo, geração de QR Code PIX dinâmico com polling em tempo real, simulação de liquidação em sandbox e emissão de Voucher Digital (`CLYVO-...`).
+4. **Fluxo 4 — Fila Médica, Avaliação Preditiva Dual-Engine e Liquidação de Escrow (`/triagem/fila`, `/triagem/avaliar/{id}`, `/servicos/validar-voucher`):**
+   - Baixa presencial do Voucher Digital pelo veterinário (liberando o repasse do Escrow) e exame clínico assistido por IA com cálculo de Escore de Longevidade (0–100), $P(\text{Higidez})$ e registro SOAP na linha do tempo do paciente.
+
+---
+
+## 🧪 Testes Automatizados (113 Testes + E2E Playwright)
 
 ```bash
-mvn test   # 77 testes automatizados (100% aprovados)
+mvn clean test   # 113 testes automatizados em 23 classes de teste (0 falhas, 0 erros)
 ```
 
-| Classe | O que cobre |
+| Suíte de Teste | Cobertura Técnica |
 | :--- | :--- |
-| `ControleDeAcessoPorPerfilTest` | Login público, redirecionamento para `/login`, autenticação BCrypt, `403`/`200` por perfil. |
-| `CadastroERecuperacaoSenhaTest` | Autocadastro (sucesso, senhas diferentes, username duplicado), recuperação de senha sem revelar e-mails existentes, token inválido. |
-| `RecuperacaoSenhaServiceTest` | Geração de token, redefinição válida troca a senha (BCrypt), token expirado e token já usado são rejeitados. |
-| `CustomOAuth2UserServiceTest` | Provisiona novo tutor via Google (CPF provisório, sem senha), vincula conta local existente pelo e-mail, login repetido não duplica conta. |
-| `CustomUserDetailsServiceTest` | Conta local carrega normalmente; conta só-Google (sem senha) não quebra o login local — cai como "usuário não encontrado" em vez de estourar exceção. |
-| `PerfilServiceTest` | Conclusão de cadastro troca o CPF provisório pelo real; não permite repetir a troca. |
-| `CheckinServiceTest` | Pontuação, streak, alerta clínico, duplicidade e vínculo do pet com o tutor. |
-| `TriagemServiceTest` | Triagem clínica fisiológica comparada: endodérmicos e ectotérmicos (répteis e peixes sem penalidade mamífera; aves com eutermia cloacal). |
-| `PredictiveMlEngineTest` | Motor preditivo multivariado com modelos especializados: `CanineWellness`, `Ectothermic`, `Aquatic` e `Avian`. |
-| `PetBiometriaValidacaoTest` | Validação biométrica estrita de limites de peso e idade por raça e formatação em gramas para pequenos animais. |
-| `MarketplaceModelagemTest` | Ciclo completo do marketplace: catálogo, agendamento, split de 15% em escrow, validação de voucher e liquidação PIX. |
+| `ControleDeAcessoPorPerfilTest` / `DashboardTutorSemPerfilTest` | RBAC completo (`ROLE_TUTOR` vs `ROLE_ADMIN`), proteção CSRF, login BCrypt e redirecionamentos seguros. |
+| `CadastroERecuperacaoSenhaTest` / `RecuperacaoSenhaServiceTest` | Autocadastro transacional, validação de duplicidade e ciclo completo de token de recuperação de senha. |
+| `CustomOAuth2UserServiceTest` / `PerfilServiceTest` | Provisionamento social via Google OAuth2, vínculo de conta por e-mail e conclusão de cadastro (CPF provisório $\rightarrow$ real). |
+| `CheckinServiceTest` | Pontuação gamificada, evolução de streak/nível (Prata $\rightarrow$ Ouro), disparo de alertas clínicos e bloqueio de duplicidade diária. |
+| `TriagemServiceTest` / `PredictiveMlEngineTest` / `LongevidadeCalculadoraMultiEspecieTest` | Motor Dual-Engine CDSS, Guardrails AAHA/WSAVA, inferência ML canina e motores fisiológicos para ectotérmicos, aves, felinos e exóticos. |
+| `PetBiometriaValidacaoTest` / `PetServiceEditTest` | Limites biométricos por espécie/raça, atualização isolada de peso com registro em prontuário e exclusão em cascata. |
+| `CheckoutControllerTest` / `PagamentoSplitServiceTest` / `CoFinanciamentoParitarioTest` / `CheckoutLedgerIntegracaoTest` | Fluxo completo de checkout, proteção **Anti-IDOR** no polling de status, cálculo de subsídio paritário com Floor Protection (75%) e custódia Escrow. |
+| `StripeGatewayServiceTest` / `StripeWebhookControllerTest` / `RetornoStripeSegurancaTest` / `GatewayPagamentoIntegracaoTest` | Integração Stripe Checkout, validação criptográfica HMAC-SHA256 de webhooks e prevenção de confirmação forjada por URL. |
 
 ---
 
-## 💻 Tecnologias
-- **Java 21** · **Spring Boot 3.3.4** (Web MVC, Validation, Data JPA)
-- **Spring Security 6** (form login, **OAuth2 Client** para Google, BCrypt, CSRF, roles)
-- **Flyway** (10 migrações versionadas) · **H2** em memória, modo Oracle (driver `ojdbc11` incluído para troca de banco)
-- **Spring Mail** (opcional — recuperação de senha)
-- **Thymeleaf** + `thymeleaf-extras-springsecurity6` · **Bootstrap 5.3** + Bootstrap Icons
-- **JUnit 5** + `spring-security-test` (MockMvc)
-
----
-
-## 📁 Estrutura do Projeto
-```
+## 📁 Estrutura do Repositório
+```text
 clyvo-vet-web-v2/
-├── docs/                                        # Documentação herdada da entrega original
+├── Dockerfile                                    # Build multi-stage (Maven JDK 21 -> JRE 21 Alpine)
+├── render.yaml                                   # Blueprint IaC (Web Service + PostgreSQL no Render)
+├── docs/
+│   ├── ROTEIRO_GRAVACAO_VIDEO.md                 # Roteiro de até 15 min dividido para toda a equipe (4ª Sprint)
+│   ├── INTEGRACAO_MULTIDISCIPLINAR_SPRINT4.md    # Matriz de integração com as demais disciplinas FIAP
+│   ├── DOSSIE_TECNICO_AVALIACAO_CRITICA.md       # Dossiê arquitetural, ML e engenharia financeira
+│   ├── GUIA_AVALIACAO_ORAL.md                    # Perguntas e respostas técnicas para a banca
+│   ├── PESQUISA_DE_MERCADO_CLYVO_VET.md          # Fundamentação mercadológica e unit economics
+│   └── sql/
+│       └── SCHEMA_E_SEED_CONSOLIDADO_SPRINT4.sql # DDL 3FN (15 tabelas) + Consultas Analíticas SQL
 ├── src/main/java/com/fiap/clyvovet/
-│   ├── config/
-│   │   ├── SecurityConfig.java                  # Autenticação local + OAuth2, perfis, CSRF condicional
-│   │   ├── GoogleOAuth2Config.java               # ClientRegistrationRepository do Google (condicional)
-│   │   └── OAuth2FeatureFlags.java               # Expõe se o login Google está habilitado
-│   ├── controller/
-│   │   ├── AuthController.java                   # /login, /cadastro, /recuperar-senha, /redefinir-senha
-│   │   └── PerfilController.java                 # /perfil/completar-cadastro (tutores vindos do Google)
-│   ├── dto/                                      # CadastroUsuarioDto, RecuperarSenhaDto, RedefinirSenhaDto...
-│   ├── model/                                    # ProviderAutenticacao, TokenRecuperacaoSenha, ...
-│   ├── repository/
-│   └── service/
-│       ├── UsuarioService.java                   # Autocadastro (Usuario + Tutor)
-│       ├── RecuperacaoSenhaService.java          # Token, e-mail, redefinição
-│       ├── NotificacaoEmailService.java          # Envio com fallback de log em dev
-│       ├── CustomOAuth2UserService.java          # Provisionamento/vínculo via Google
-│       └── PerfilService.java                    # Conclusão de cadastro (CPF provisório → real)
+│   ├── config/                                   # SecurityConfig, GoogleOAuth2Config, DataSourceUrlNormalizerConfig
+│   ├── controller/                               # Auth, Home, Pet, Checkin, Triagem, Checkout, Webhook, Perfil
+│   ├── dto/                                      # DTOs com Bean Validation e Records de Explicabilidade/ML
+│   ├── exception/                                # GlobalExceptionHandler (@ControllerAdvice)
+│   ├── gateway/                                  # Strategy de Pagamentos (Stripe, MercadoPago, Simulado)
+│   ├── model/                                    # 15 Entidades JPA mapeadas em 3FN
+│   ├── repository/                               # 16 Interfaces Spring Data JPA
+│   └── service/                                  # Regras de negócio, SplitFinanceiroCalculator e 10 Motores CDSS
 ├── src/main/resources/
-│   ├── application.properties                    # Perfil de desenvolvimento (padrão)
-│   ├── application-prod.properties               # Perfil de produção
-│   ├── db/migration/V1..V4__*.sql                # Flyway (V4 = login social + recuperação de senha)
-│   └── templates/                                # + cadastro, recuperar-senha, redefinir-senha, completar-cadastro
-├── src/test/java/com/fiap/clyvovet/
-└── pom.xml
+│   ├── application.properties                    # Perfil dev (H2 em memória + Flyway)
+│   ├── application-prod.properties               # Perfil prod (PostgreSQL + Segurança estrita)
+│   ├── db/migration/V1..V15__*.sql               # 15 Migrações evolutivas Flyway
+│   ├── static/css/clyvo.css                      # Design System Clínico ("Ficha Clínica")
+│   └── templates/                                # 21 Views Thymeleaf modulares e responsivas
+└── src/test/java/com/fiap/clyvovet/              # 23 Classes de Teste (113 Testes Automatizados)
 ```
 
 ---
 
 <div align="center">
-  <sub>Evolução do Clyvo Vet além da entrega da 3ª Sprint de Java Advanced — FIAP.</sub>
+  <sub>Desenvolvido para a <b>Entrega Final da 4ª Sprint de Java Advanced — FIAP (2026)</b>.</sub>
 </div>

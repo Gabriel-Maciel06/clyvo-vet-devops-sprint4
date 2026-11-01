@@ -71,19 +71,10 @@ public class CheckoutController {
             dto.setPetId(pets.get(0).getId());
         }
 
-        if (tipoServico != null) {
-            dto.setTipoServico(tipoServico);
-        } else {
-            dto.setTipoServico(TipoServicoPreventivo.CONSULTA_PREVENTIVA);
-        }
-
-        PagamentoSplitService.ResumoSplit split = pagamentoSplitService.calcularResumo(tutor.getCpf(), dto.getTipoServico());
+        dto.setTipoServico(tipoServico != null ? tipoServico : TipoServicoPreventivo.CONSULTA_PREVENTIVA);
 
         model.addAttribute("checkoutDto", dto);
-        model.addAttribute("pets", pets);
-        model.addAttribute("servicos", TipoServicoPreventivo.values());
-        model.addAttribute("split", split);
-        model.addAttribute("tutor", tutor);
+        popularModeloCheckout(model, pets, tutor, dto.getTipoServico());
         return "servicos/checkout";
     }
 
@@ -95,16 +86,7 @@ public class CheckoutController {
                                     Model model,
                                     RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            List<Pet> pets = petService.listarPorTutor(auth.getName());
-            Tutor tutor = tutorRepository.findByUsuarioUsername(auth.getName()).orElse(null);
-            PagamentoSplitService.ResumoSplit split = (tutor != null && dto.getTipoServico() != null)
-                    ? pagamentoSplitService.calcularResumo(tutor.getCpf(), dto.getTipoServico())
-                    : null;
-
-            model.addAttribute("pets", pets);
-            model.addAttribute("servicos", TipoServicoPreventivo.values());
-            model.addAttribute("split", split);
-            model.addAttribute("tutor", tutor);
+            popularModeloCheckoutPorUsername(model, auth.getName(), dto.getTipoServico());
             return "servicos/checkout";
         }
 
@@ -126,13 +108,8 @@ public class CheckoutController {
 
             return "redirect:/servicos/pagamento/" + agendamento.getId();
         } catch (Exception e) {
-            List<Pet> pets = petService.listarPorTutor(auth.getName());
-            Tutor tutor = tutorRepository.findByUsuarioUsername(auth.getName()).orElse(null);
             model.addAttribute("errorMessage", "Erro ao processar pagamento: " + e.getMessage());
-            model.addAttribute("pets", pets);
-            model.addAttribute("servicos", TipoServicoPreventivo.values());
-            model.addAttribute("split", (tutor != null && dto.getTipoServico() != null) ? pagamentoSplitService.calcularResumo(tutor.getCpf(), dto.getTipoServico()) : null);
-            model.addAttribute("tutor", tutor);
+            popularModeloCheckoutPorUsername(model, auth.getName(), dto.getTipoServico());
             return "servicos/checkout";
         }
     }
@@ -192,13 +169,7 @@ public class CheckoutController {
     @PreAuthorize("hasRole('TUTOR')")
     @GetMapping("/pagamento/{id}")
     public String telaPagamento(@PathVariable("id") Long id, Authentication auth, Model model) {
-        AgendamentoServico agendamento = pagamentoSplitService.buscarPorId(id);
-        Tutor tutor = tutorRepository.findByUsuarioUsername(auth.getName())
-                .orElseThrow(() -> new IllegalArgumentException("Tutor não encontrado: " + auth.getName()));
-
-        if (!agendamento.getTutor().getCpf().equals(tutor.getCpf())) {
-            throw new org.springframework.security.access.AccessDeniedException("Acesso negado a este pagamento.");
-        }
+        AgendamentoServico agendamento = buscarAgendamentoAutorizado(id, auth);
 
         if (agendamento.getStatusPagamento() == StatusPagamento.PAGO_CONFIRMADO
                 || agendamento.getStatusPagamento() == StatusPagamento.UTILIZADO_NA_CLINICA) {
@@ -207,7 +178,8 @@ public class CheckoutController {
 
         model.addAttribute("agendamento", agendamento);
         model.addAttribute("transacao", agendamento.getTransacao());
-        model.addAttribute("split", pagamentoSplitService.calcularResumo(tutor.getCpf(), agendamento.getTipoServico()));
+        model.addAttribute("split", pagamentoSplitService.calcularResumo(
+                agendamento.getTutor().getCpf(), agendamento.getTipoServico()));
         return "servicos/pagamento";
     }
 
@@ -215,6 +187,7 @@ public class CheckoutController {
     @GetMapping("/pagamento/{id}/status")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> checarStatusPagamento(@PathVariable("id") Long id, Authentication auth) {
+        buscarAgendamentoAutorizado(id, auth);
         AgendamentoServico agendamento = pagamentoSplitService.consultarEAtualizarStatus(id);
         boolean pago = (agendamento.getStatusPagamento() == StatusPagamento.PAGO_CONFIRMADO
                 || agendamento.getStatusPagamento() == StatusPagamento.UTILIZADO_NA_CLINICA);
@@ -230,13 +203,7 @@ public class CheckoutController {
     @PreAuthorize("hasRole('TUTOR')")
     @PostMapping("/pagamento/{id}/simular")
     public String simularPagamento(@PathVariable("id") Long id, Authentication auth, RedirectAttributes redirectAttributes) {
-        AgendamentoServico agendamento = pagamentoSplitService.buscarPorId(id);
-        Tutor tutor = tutorRepository.findByUsuarioUsername(auth.getName())
-                .orElseThrow(() -> new IllegalArgumentException("Tutor não encontrado: " + auth.getName()));
-
-        if (!agendamento.getTutor().getCpf().equals(tutor.getCpf())) {
-            throw new org.springframework.security.access.AccessDeniedException("Acesso negado a este pagamento.");
-        }
+        buscarAgendamentoAutorizado(id, auth);
 
         pagamentoSplitService.simularConfirmacaoPagamento(id);
         redirectAttributes.addFlashAttribute("successMessage",
@@ -247,17 +214,37 @@ public class CheckoutController {
     @PreAuthorize("hasRole('TUTOR')")
     @GetMapping("/voucher/{id}")
     public String verVoucher(@PathVariable("id") Long id, Authentication auth, Model model) {
-        AgendamentoServico agendamento = pagamentoSplitService.buscarPorId(id);
-        Tutor tutor = tutorRepository.findByUsuarioUsername(auth.getName())
-                .orElseThrow(() -> new IllegalArgumentException("Tutor não encontrado"));
-
-        // Garante que o voucher pertence ao tutor logado
-        if (!agendamento.getTutor().getCpf().equals(tutor.getCpf())) {
-            throw new org.springframework.security.access.AccessDeniedException("Acesso negado a este voucher");
-        }
-
+        AgendamentoServico agendamento = buscarAgendamentoAutorizado(id, auth);
         model.addAttribute("voucher", agendamento);
         return "servicos/voucher";
+    }
+
+    private AgendamentoServico buscarAgendamentoAutorizado(Long id, Authentication auth) {
+        AgendamentoServico agendamento = pagamentoSplitService.buscarPorId(id);
+        Tutor tutor = tutorRepository.findByUsuarioUsername(auth.getName())
+                .orElseThrow(() -> new org.springframework.security.access.AccessDeniedException(
+                        "Acesso negado a este agendamento."));
+
+        if (!agendamento.getTutor().getCpf().equals(tutor.getCpf())) {
+            throw new org.springframework.security.access.AccessDeniedException("Acesso negado a este agendamento.");
+        }
+        return agendamento;
+    }
+
+    private void popularModeloCheckoutPorUsername(Model model, String username, TipoServicoPreventivo tipoServico) {
+        List<Pet> pets = petService.listarPorTutor(username);
+        Tutor tutor = tutorRepository.findByUsuarioUsername(username).orElse(null);
+        popularModeloCheckout(model, pets, tutor, tipoServico);
+    }
+
+    private void popularModeloCheckout(Model model, List<Pet> pets, Tutor tutor, TipoServicoPreventivo tipoServico) {
+        PagamentoSplitService.ResumoSplit split = (tutor != null && tipoServico != null)
+                ? pagamentoSplitService.calcularResumo(tutor.getCpf(), tipoServico)
+                : null;
+        model.addAttribute("pets", pets);
+        model.addAttribute("servicos", TipoServicoPreventivo.values());
+        model.addAttribute("split", split);
+        model.addAttribute("tutor", tutor);
     }
 
     @PreAuthorize("hasRole('TUTOR')")

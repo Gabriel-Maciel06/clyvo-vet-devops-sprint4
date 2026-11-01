@@ -397,7 +397,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     padding: 0.5rem 1.15rem;
     border: none;
     background: transparent;
-    transition: all 0.15s ease-in-out;
+    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .clyvo-pills .nav-link:hover {
     color: var(--clyvo-ink);
@@ -498,7 +498,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     border-radius: 4px;
     padding: 2px 7px;
     opacity: 0.9;
-    transition: all 0.15s ease;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
 }
 .select2-container--bootstrap-5 .select2-results__group:hover::after {
     opacity: 1;
@@ -620,7 +620,7 @@ span.flatpickr-weekday {
     color: #334155 !important;
     height: 36px !important;
     line-height: 36px !important;
-    transition: all 0.15s ease-in-out !important;
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, color 0.15s ease-in-out !important;
 }
 .flatpickr-day:hover {
     background: #f0fdfa !important;
@@ -663,6 +663,178 @@ span.flatpickr-weekday {
     border-color: var(--clyvo-teal, #0d9488) !important;
     box-shadow: 0 0 0 0.2rem rgba(13, 148, 136, 0.18) !important;
 }
+
+/* --------------------------------------------------------------------------
+   Casca da aplicação (App Shell): sidebar + barra superior + conteúdo
+   -------------------------------------------------------------------------- */
+.app-wrapper {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+.sidebar {
+    width: 272px;
+    height: 100vh;
+    background: var(--clyvo-sidebar-bg);
+    color: #94a3b8;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    z-index: 1000;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+}
+.sidebar-brand {
+    flex-shrink: 0;
+    padding: 1.35rem 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    text-decoration: none;
+}
+.sidebar-footer {
+    flex-shrink: 0;
+    padding: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.sidebar-brand-icon {
+    width: 38px;
+    height: 38px;
+    background: var(--clyvo-teal);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.25rem;
+}
+.sidebar-brand-text {
+    font-family: var(--clyvo-font-display);
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: white;
+}
+.sidebar-brand-text span { color: #2dd4bf; }
+
+.sidebar-menu {
+    padding: 0.9rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+.sidebar-section-title {
+    font-size: 0.74rem;
+    font-weight: 500;
+    color: #64748b;
+    padding: 1rem 0.8rem 0.4rem;
+}
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6rem 0.8rem;
+    border-radius: 8px;
+    color: #cbd5e1;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-decoration: none;
+    border-left: 2px solid transparent;
+}
+.sidebar-link-content { display: flex; align-items: center; gap: 0.7rem; }
+.sidebar-link i { font-size: 1.05rem; color: #64748b !important; }
+.sidebar-link:hover { background-color: rgba(255, 255, 255, 0.05); color: #f8fafc; }
+.sidebar-link:hover i { color: #cbd5e1 !important; }
+.sidebar-link.active {
+    background: rgba(13, 148, 136, 0.16);
+    color: #ffffff;
+    border-left-color: #2dd4bf;
+}
+.sidebar-link.active i { color: #2dd4bf !important; }
+.sidebar .badge {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: #cbd5e1 !important;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 0.68rem !important;
+    font-weight: 500;
+}
+.sidebar-widget {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 0.75rem 0.25rem 0.5rem;
+}
+.sidebar-widget p { color: #cbd5e1 !important; line-height: 1.45; }
+.sidebar-footer .user-role-label { color: #94a3b8 !important; font-weight: 400; }
+.sidebar-avatar {
+    width: 36px; height: 36px; min-width: 36px;
+    border-radius: 50%;
+    background: var(--clyvo-teal);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+}
+.sidebar-footer .btn { color: #94a3b8; }
+.sidebar-footer .btn:hover { color: #fff; }
+
+.main-content {
+    flex-grow: 1;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background-color: var(--clyvo-bg);
+    overflow-y: auto;
+}
+
+.topbar {
+    min-height: 64px;
+    background-color: #fff;
+    border-bottom: 1px solid var(--clyvo-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.75rem;
+    position: sticky;
+    top: 0;
+    z-index: 99;
+}
+.topbar .badge {
+    background: transparent !important;
+    border: 0 !important;
+    color: var(--clyvo-muted) !important;
+    font-size: 0.82rem !important;
+    padding: 0;
+}
+.topbar .badge i { color: var(--clyvo-teal); }
+.topbar .badge i.text-success { color: #16a34a !important; }
+
+footer { color: var(--clyvo-muted); }
+
+@media (max-width: 992px) {
+    .app-wrapper { flex-direction: column; height: auto; }
+    .sidebar { width: 100%; height: auto; overflow: visible; }
+    .sidebar-menu { overflow-y: visible; flex-grow: 0; }
+    .main-content { height: auto; overflow-y: visible; }
+}
+@media (max-width: 768px) {
+    .topbar {
+        height: auto;
+        min-height: 56px;
+        padding: 0.6rem 1rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    .main-content { width: 100%; overflow-x: hidden; }
+    main.container-fluid {
+        padding-left: 0.85rem !important;
+        padding-right: 0.85rem !important;
+    }
+}
+
 
 
 

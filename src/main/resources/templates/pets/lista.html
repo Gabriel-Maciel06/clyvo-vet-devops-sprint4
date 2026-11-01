@@ -42,8 +42,8 @@
                                 <a th:href="@{/checkin/novo(petId=${pet.id})}" class="btn btn-clyvo flex-grow-1">
                                     <i class="bi bi-check-circle-fill me-1"></i> Check-in Diário
                                 </a>
-                                <a th:href="@{/pets/{id}/editar(id=${pet.id})}" class="btn btn-outline-secondary px-3 d-flex align-items-center justify-content-center" title="Editar pet">
-                                    <i class="bi bi-pencil-square"></i>
+                                <a th:href="@{/pets/{id}/editar(id=${pet.id})}" class="btn btn-outline-secondary px-3 d-flex align-items-center justify-content-center" title="Editar pet" aria-label="Editar dados do pet">
+                                    <i class="bi bi-pencil-square" aria-hidden="true"></i>
                                 </a>
                             </div>
                         </div>
