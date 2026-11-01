@@ -1,0 +1,169 @@
+# ==============================================================================
+# FIAP — 4ª SPRINT: DEVOPS TOOLS & CLOUD COMPUTING + JAVA ADVANCED
+# Projeto: Sprint 4 – Azure DevOps (Clyvo Vet Web v2)
+# Turma: 2TDSR | Professor: Prof. João Menk
+# ==============================================================================
+# Regras Obrigatórias Atendidas:
+# [I]   Conectada ao repositório da aplicação (GitHub / Azure Repos)
+# [II]  Trigger automático de CI a cada alteração na branch 'master' (e 'main')
+# [III] Stage de CD dispara automaticamente após novo artefato gerado no CI
+# [IV]  Variáveis sensíveis protegidas via Variable Group (clyvo-sprint4-secrets)
+# [V]   Geração e publicação do artefato ('drop') no Azure DevOps
+# [VI]  Execução obrigatória dos 113 testes automatizados JUnit 5 no CI
+# [VII] Deploy automatizado em Azure Web App (Linux Java 21) ou Azure ACI
+# ==============================================================================
+
+trigger:
+  branches:
+    include:
+      - master
+      - main
+
+pr:
+  branches:
+    include:
+      - master
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  # Grupo de variáveis protegidas com cadeado (Pipelines -> Library -> clyvo-sprint4-secrets)
+  # Contém: DB_URL, DB_USER, DB_PASSWORD, AZURE_SERVICE_CONNECTION, AZURE_WEBAPP_NAME, AZURE_RESOURCE_GROUP
+  - group: clyvo-sprint4-secrets
+  - name:MAVEN_CACHE_FOLDER
+    value: $(Pipeline.Workspace)/.m2/repository
+  - name: MAVEN_OPTS
+    value: '-Dmaven.repo.local=$(Pipeline.Workspace)/.m2/repository'
+  - name: ARTIFACT_NAME
+    value: 'drop'
+  - name: JAVA_VERSION
+    value: '21'
+
+stages:
+  # ============================================================================
+  # STAGE 1: CONTINUOUS INTEGRATION (CI) — BUILD + TESTES + ARTEFATO
+  # ============================================================================
+  - stage: CI
+    displayName: 'Stage 1 (CI): Build, Testes Automatizados e Artefato'
+    jobs:
+      - job: BuildAndTestJob
+        displayName: 'CI Job: Compilar Java 21, Executar 113 Testes e Publicar JAR'
+        steps:
+          # Passo 1: Checkout do código-fonte
+          - checkout: self
+            fetchDepth: 1
+            displayName: '1. Checkout do Código-Fonte (Branch master/main)'
+
+          # Passo 2: Configurar JDK 21 (Eclipse Temurin)
+          - task: JavaToolInstaller@0
+            displayName: '2. Configurar Java JDK 21 LTS'
+            inputs:
+              versionSpec: '21'
+              jdkArchitectureOption: 'x64'
+              jdkSourceOption: 'PreInstalled'
+
+          # Passo 3: Cache de dependências Maven para acelerar a esteira
+          - task: Cache@2
+            displayName: '3. Cache de Dependências Maven (.m2)'
+            inputs:
+              key: 'maven | "$(Agent.OS)" | pom.xml'
+              restoreKeys: |
+                maven | "$(Agent.OS)"
+                maven
+              path: $(MAVEN_CACHE_FOLDER)
+
+          # Passo 4: Compilação e Execução Obrigatória dos Testes Automatizados (Regra VI)
+          - task: Maven@4
+            displayName: '4. Executar Build + 113 Testes Automatizados JUnit 5 (mvn clean test)'
+            inputs:
+              mavenPomFile: 'pom.xml'
+              goals: 'clean test'
+              options: '-B $(MAVEN_OPTS)'
+              publishJUnitResults: true
+              testResultsFiles: '**/surefire-reports/TEST-*.xml'
+              testRunTitle: 'Clyvo Vet v2 - Suíte JUnit 5 (113 Testes)'
+              javaHomeOption: 'JDKVersion'
+              jdkVersionOption: '1.21'
+              mavenVersionOption: 'Default'
+
+          # Passo 5: Empacotamento do Artefato Executável Spring Boot (.jar)
+          - task: Maven@4
+            displayName: '5. Gerar Pacote Executável Spring Boot (mvn package -DskipTests)'
+            inputs:
+              mavenPomFile: 'pom.xml'
+              goals: 'package'
+              options: '-B -DskipTests $(MAVEN_OPTS)'
+              javaHomeOption: 'JDKVersion'
+              jdkVersionOption: '1.21'
+
+          # Passo 6: Copiar o JAR gerado para o diretório de Staging do Azure DevOps
+          - task: CopyFiles@2
+            displayName: '6. Preparar Artefato JAR no Staging Directory'
+            inputs:
+              SourceFolder: '$(System.DefaultWorkingDirectory)/target'
+              Contents: '*.jar'
+              TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+          # Passo 7: Publicar o Artefato no Ambiente do Azure DevOps (Regra V)
+          - task: PublishBuildArtifacts@1
+            displayName: '7. Publicar Artefato no Azure DevOps (drop)'
+            inputs:
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              ArtifactName: '$(ARTIFACT_NAME)'
+              publishLocation: 'Container'
+
+  # ============================================================================
+  # STAGE 2: CONTINUOUS DEPLOYMENT (CD) — DEPLOY AUTOMÁTICO NA AZURE
+  # ============================================================================
+  - stage: CD
+    displayName: 'Stage 2 (CD): Deploy Automático na Microsoft Azure'
+    dependsOn: CI
+    condition: succeeded('CI')
+    jobs:
+      - deployment: DeployToAzureCloud
+        displayName: 'CD Job: Provisionar e Publicar Artefato no Azure Web App / ACI'
+        environment: 'producao-azure-sprint4'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                # Passo 1: Download do novo artefato gerado pelo CI (Regra III)
+                - task: DownloadBuildArtifacts@1
+                  displayName: '1. Baixar Novo Artefato Publicado pelo CI (drop)'
+                  inputs:
+                    buildType: 'current'
+                    downloadType: 'single'
+                    artifactName: '$(ARTIFACT_NAME)'
+                    downloadPath: '$(System.ArtifactsDirectory)'
+
+                # Passo 2: Validação segura das Variáveis Protegidas (Regra IV — sem expor segredos)
+                - script: |
+                    echo "=========================================================="
+                    echo "Iniciando Deploy Contínuo (CD) — Clyvo Vet Web v2"
+                    echo "Resource Group Alvo : $(AZURE_RESOURCE_GROUP)"
+                    echo "Recurso Azure Alvo  : $(AZURE_WEBAPP_NAME)"
+                    echo "Profile Spring Boot : prod (Banco de Dados PostgreSQL em Nuvem)"
+                    echo "Credenciais DB_USER e DB_PASSWORD carregadas via Secret Variables (Cadeado)"
+                    echo "=========================================================="
+                    ls -lh $(System.ArtifactsDirectory)/$(ARTIFACT_NAME)/*.jar
+                  displayName: '2. Validar Artefato e Variáveis Protegidas (Secret Variables)'
+
+                # Passo 3: Deploy Automatizado no Azure Web App (PaaS Linux Java 21) — Regra VII
+                - task: AzureWebApp@1
+                  displayName: '3. Deploy Automático no Azure Web App (Java 21 LTS + PostgreSQL Cloud)'
+                  inputs:
+                    azureSubscription: '$(AZURE_SERVICE_CONNECTION)'
+                    appType: 'webAppLinux'
+                    appName: '$(AZURE_WEBAPP_NAME)'
+                    package: '$(System.ArtifactsDirectory)/$(ARTIFACT_NAME)/*.jar'
+                    runtimeStack: 'JAVA|21-java21'
+                    appSettings: >-
+                      -SPRING_PROFILES_ACTIVE prod
+                      -PORT 8080
+                      -WEBSITES_PORT 8080
+                      -DB_URL "$(DB_URL)"
+                      -DB_USER "$(DB_USER)"
+                      -DB_PASSWORD "$(DB_PASSWORD)"
+                      -JAVA_OPTS "-Dserver.port=8080 -Xms256m -Xmx512m"

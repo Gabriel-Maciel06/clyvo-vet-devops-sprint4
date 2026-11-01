@@ -5,22 +5,95 @@
 
 [![Java](https://img.shields.io/badge/Java-21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.4-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
-[![Spring Security](https://img.shields.io/badge/Spring%20Security-OAuth2%20%2B%20Form%20Login-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white)](https://spring.io/projects/spring-security)
+[![Azure DevOps](https://img.shields.io/badge/Azure%20DevOps-CI%2FCD%20Pipelines-0078D7?style=for-the-badge&logo=azuredevops&logoColor=white)](azure-pipelines.yml)
+[![Microsoft Azure](https://img.shields.io/badge/Microsoft%20Azure-Web%20App%20%2B%20PostgreSQL%20Cloud-0089D6?style=for-the-badge&logo=microsoftazure&logoColor=white)](scripts/devops/provision-azure-webapp-postgres.sh)
 [![Flyway](https://img.shields.io/badge/Flyway-15%20Migrations%20(3FN)-CC0200?style=for-the-badge&logo=flyway&logoColor=white)](https://flywaydb.org/)
 [![Tests](https://img.shields.io/badge/Tests-113%20JUnit%20%2B%20Playwright%20E2E-0d9488?style=for-the-badge&logo=junit5&logoColor=white)](#-testes-automatizados-113-testes--e2e-playwright)
 
 <p align="center">
+  <a href="#-integrantes-do-grupo-turma-2tdsr">Integrantes</a> •
+  <a href="#-devops-tools--cloud-computing--4ª-sprint-azure-devops--cicd"><b>☁️ DevOps & CI/CD (4ª Sprint)</b></a> •
   <a href="#-narrativa-da-solução--proposta-de-valor">Narrativa</a> •
   <a href="#-integração-multidisciplinar-fiap-4ª-sprint">Integração Multidisciplinar</a> •
   <a href="#-como-executar-localmente">Como Executar</a> •
-  <a href="#-deploy-online-docker--render">Deploy Online</a> •
   <a href="#-arquitetura--decisões-de-design">Arquitetura</a> •
-  <a href="#-fluxos-principais-do-sistema">Fluxos</a> •
   <a href="#-testes-automatizados-113-testes--e2e-playwright">Testes</a> •
-  <a href="docs/ROTEIRO_GRAVACAO_VIDEO.md"><b>🎬 Roteiro do Vídeo (15 min)</b></a>
+  <a href="docs/ROTEIRO_GRAVACAO_VIDEO.md"><b>🎬 Roteiro Java (15 min)</b></a> •
+  <a href="docs/devops/GUIA_E_ROTEIRO_VIDEO_DEVOPS_SPRINT4.md"><b>🚀 Roteiro DevOps (CI/CD)</b></a>
 </p>
 
 </div>
+
+---
+
+## 👥 Integrantes do Grupo (Turma 2TDSR)
+
+| Nome Completo | RM | Turma |
+| :--- | :---: | :---: |
+| **Gabriel Maciel Alves de Oliveira** | `RM562795` | `2TDSR` |
+| **Vitória Rodrigues Martins** | `RM565160` | `2TDSR` |
+| **Augusto Bonomo Júnior** | `RM565155` | `2TDSR` |
+| **Thomas Fontes** | `RM562254` | `2TDSR` |
+| **Matheus Pereira Molina** | `RM563399` | `2TDSR` |
+
+---
+
+## ☁️ DevOps Tools & Cloud Computing — 4ª Sprint (Azure DevOps & CI/CD)
+
+> **Professor:** Prof. João Menk (`profjoao.menk@fiap.com.br`)  
+> **Projeto no Azure DevOps:** `Sprint 4 – Azure DevOps` (Visibilidade: `Private` | Controle de Versão: `Git` | Processo: `Scrum` | Acesso do Professor: `Basic`)  
+> **Artefatos Diretos de DevOps:**  
+> - 📄 **PDF Obrigatório da Entrega:** [`Entrega_DevOps_Sprint4_FIAP.pdf`](Entrega_DevOps_Sprint4_FIAP.pdf)  
+> - ⚙️ **Pipeline CI/CD (YAML):** [`azure-pipelines.yml`](azure-pipelines.yml) *(Opção Azure Web App)* e [`docs/devops/azure-pipelines-aci.yml`](docs/devops/azure-pipelines-aci.yml) *(Opção Azure ACI)*  
+> - 🗺️ **Diagrama de Arquitetura + Fluxo CI/CD:** [`docs/devops/arquitetura-cicd-sprint4.png`](docs/devops/arquitetura-cicd-sprint4.png)  
+> - 🛢️ **Script SQL de Evidências CRUD no Banco Cloud:** [`docs/devops/EVIDENCIAS_CRUD_BANCO_NUVEM.sql`](docs/devops/EVIDENCIAS_CRUD_BANCO_NUVEM.sql)  
+> - 🎬 **Guia Passo a Passo & Roteiro do Vídeo de DevOps:** [`docs/devops/GUIA_E_ROTEIRO_VIDEO_DEVOPS_SPRINT4.md`](docs/devops/GUIA_E_ROTEIRO_VIDEO_DEVOPS_SPRINT4.md)
+
+### 1. Descrição da Solução e Stack de Tecnologias Utilizadas
+O **Clyvo Vet Web v2** é uma plataforma corporativa em nuvem de **Medicina Veterinária Preventiva, Predição de Longevidade Pet e Marketplace Clínico B2B2C**. A solução permite que **Tutores** gerenciem o prontuário biométrico de seus pets (CRUD completo em 9 classes biológicas), realizem check-ins gamificados de saúde diária, solicitem triagens assistidas por Inteligência Artificial e contratem serviços preventivos com pagamento in-app; enquanto **Médicos Veterinários** gerenciam a fila de prioridades clínicas, executam avaliações preditivas Dual-Engine (Machine Learning + Guardrails AAHA/WSAVA) e validam vouchers digitais.
+
+| Camada da Stack | Tecnologia / Ferramenta Utilizada | Papel na Arquitetura e na Esteira CI/CD |
+| :--- | :--- | :--- |
+| **Linguagem & Framework** | **Java 21 LTS (Eclipse Temurin)** + **Spring Boot 3.3.4** | Backend MVC e REST API com alta performance e tipagem forte. |
+| **Segurança & Autenticação** | **Spring Security 6** + **BCrypt** + **Google OAuth2/OIDC** | Controle de acesso RBAC (`ROLE_TUTOR` e `ROLE_ADMIN`), CSRF e proteção Anti-IDOR. |
+| **Persistência & Migrações** | **Spring Data JPA / Hibernate** + **Flyway (`V1`..`V15`)** | Versionamento evolutivo determinístico das **15 tabelas em 3FN** (`ddl-auto=none`). |
+| **Banco de Dados em Nuvem** | **PostgreSQL 16 em Nuvem** (Azure / Cloud Container / PaaS) | Persistência relacional em nuvem na porta `5432` sem uso de banco local/H2 em produção. |
+| **Interface de Usuário (UI)** | **Thymeleaf** + **Bootstrap 5** + **Design System Autoral** | Views server-side responsivas com fragmentos reutilizáveis (DRY) e acessibilidade WCAG. |
+| **Qualidade & Testes (CI)** | **Maven 3.9** + **JUnit 5** + **MockMvc** + **Playwright** | **113 testes automatizados** executados obrigatoriamente a cada build da esteira de CI. |
+| **Orquestração CI/CD** | **Azure DevOps (`Azure Pipelines`)** | Automação de Continuous Integration (Build, Test, Artifact) e Continuous Deployment. |
+| **Hospedagem Cloud (CD)** | **Microsoft Azure Web App (Linux Java 21)** / **Azure ACI** | Ambiente produtivo PaaS/Container provisionado via Azure CLI e atualizado via CD. |
+
+---
+
+### 2. Diagrama da Arquitetura + Fluxo Numerado da Esteira CI/CD (20 Pontos)
+
+![Diagrama de Arquitetura e Fluxo CI/CD - Clyvo Vet Web v2](docs/devops/arquitetura-cicd-sprint4.png)
+
+#### Ordem Numerada do Fluxo CI/CD e Operação em Nuvem (`①` a `⑩`):
+1. **`①` Commit & Push (`Git CLI / IDE`):** O **Desenvolvedor (Persona 1)** altera um componente de código no projeto (ex.: template Thymeleaf ou Controller Java) e realiza `git push origin master`.
+2. **`②` Trigger Automático de CI (`Azure Repos / GitHub Webhook`):** A alteração na branch `master` dispara automaticamente o **Stage 1 (CI)** no **Azure Pipelines**.
+3. **`③` Build & Compilação (`JavaToolInstaller@0` + `Maven@4`):** O agente Linux (`ubuntu-latest`) configura o JDK 21, restaura o cache `.m2` e compila todo o código-fonte (`mvn clean compile`).
+4. **`④` Execução de Testes Automatizados (`Maven@4` + `PublishTestResults@2`):** A pipeline executa os **113 testes automatizados JUnit 5** (`mvn clean test`) e publica o relatório XML (`TEST-*.xml`) na aba **Tests** do Azure DevOps.
+5. **`⑤` Empacotamento e Publicação do Artefato (`CopyFiles@2` + `PublishBuildArtifacts@1`):** O pacote executável `clyvo-vet-web-v2-0.0.1-SNAPSHOT.jar` é gerado e publicado como artefato **`drop`** no ambiente do Azure DevOps.
+6. **`⑥` Trigger Automático de CD + Leitura de Variáveis Protegidas (`clyvo-sprint4-secrets`):** O término com sucesso do CI e o novo artefato disparam automaticamente o **Stage 2 (CD)**, que baixa o artefato `drop` (`DownloadBuildArtifacts@1`) e consome as variáveis sensíveis protegidas com cadeado 🔒 (`DB_URL`, `DB_USER`, `DB_PASSWORD`).
+7. **`⑦` Deploy Automatizado na Microsoft Azure (`AzureWebApp@1` / `AzureCLI@2`):** A esteira realiza o deploy automático no **Azure Web App (Linux Java 21)** ou **Azure Container Instance (ACI)** dentro do Resource Group `rg-clyvo-sprint4`.
+8. **`⑧` Migração Flyway & Conexão JDBC com Banco em Nuvem (`PostgreSQL Cloud`):** Ao iniciar com `SPRING_PROFILES_ACTIVE=prod`, a aplicação conecta-se ao **PostgreSQL em Nuvem** (porta `5432`) e valida/aplica as 15 migrações Flyway em 3FN.
+9. **`⑨` Utilização pelo Usuário Final (`Persona 2 — Tutor & Veterinário`):** O usuário acessa a URL pública HTTPS na Azure e executa o **CRUD completo** (**Create, Read, Update e Delete** de Pets e prontuários).
+10. **`⑩` Auditoria e Evidência de Persistência (`Persona 3 — Professor / Desenvolvedor`):** Cada operação do CRUD é comprovada em tempo real através de consultas `SELECT` executadas diretamente dentro do banco de dados PostgreSQL em nuvem ([`docs/devops/EVIDENCIAS_CRUD_BANCO_NUVEM.sql`](docs/devops/EVIDENCIAS_CRUD_BANCO_NUVEM.sql)).
+
+---
+
+### 3. Conformidade com as 7 Regras Obrigatórias da Pipeline (`azure-pipelines.yml`)
+
+| Regra do Edital | Como Foi Implementada no Projeto |
+| :--- | :--- |
+| **I. Conectada ao repositório da aplicação** | Pipeline conectada diretamente ao repositório Git (`clyvo-vet-web-v2`) via arquivo [`azure-pipelines.yml`](azure-pipelines.yml) na raiz. |
+| **II. CI dispara a cada alteração na branch `master`** | Bloco `trigger: branches: include: [master, main]` configurado no topo do [`azure-pipelines.yml`](azure-pipelines.yml). |
+| **III. CD dispara após novo artefato gerado** | O `stage: CD` possui `dependsOn: CI` e `condition: succeeded('CI')`, executando `DownloadBuildArtifacts@1` do artefato `drop`. |
+| **IV. Variáveis de ambiente protegidas (usuários, senhas e tokens)** | Credenciais armazenadas no Variable Group `clyvo-sprint4-secrets` com cadeado 🔒 (*Secret Variables*) e injetadas via `$(DB_URL)`, `$(DB_USER)` e `$(DB_PASSWORD)`. |
+| **V. Geração e publicação do artefato no Azure DevOps** | Tasks `CopyFiles@2` e `PublishBuildArtifacts@1` publicam o artefato `drop` contendo o `.jar` executável no Azure DevOps. |
+| **VI. Etapa obrigatória de execução de testes no CI** | Task `Maven@4` executa `clean test` (113 testes JUnit 5) com `publishJUnitResults: true` (`**/surefire-reports/TEST-*.xml`). |
+| **VII. Deploy em Azure Web App ou Azure Container Instance (ACI)** | Task `AzureWebApp@1` realiza o deploy em **Azure Web App (Linux Java 21)** (ou via `AzureCLI@2` para **ACI** em [`docs/devops/azure-pipelines-aci.yml`](docs/devops/azure-pipelines-aci.yml)). |
 
 ---
 

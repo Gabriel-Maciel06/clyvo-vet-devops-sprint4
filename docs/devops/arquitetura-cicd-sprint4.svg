@@ -1,0 +1,396 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1060" width="1600" height="1060" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B1120"/>
+      <stop offset="50%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+
+    <!-- Zone Gradients -->
+    <linearGradient id="personaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="azDevopsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0C2D48"/>
+      <stop offset="100%" stop-color="#081C30"/>
+    </linearGradient>
+    <linearGradient id="azureCloudGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A2540"/>
+      <stop offset="100%" stop-color="#07192E"/>
+    </linearGradient>
+    <linearGradient id="ciCardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#173A5E"/>
+      <stop offset="100%" stop-color="#102A45"/>
+    </linearGradient>
+    <linearGradient id="cdCardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#134E4A"/>
+      <stop offset="100%" stop-color="#0F3936"/>
+    </linearGradient>
+    <linearGradient id="dbCardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E1B4B"/>
+      <stop offset="100%" stop-color="#151336"/>
+    </linearGradient>
+
+    <!-- Drop Shadow -->
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.45"/>
+    </filter>
+
+    <!-- Arrow Markers -->
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38BDF8"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#34D399"/>
+    </marker>
+    <marker id="arrowAmber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#FBBF24"/>
+    </marker>
+    <marker id="arrowPurple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#A78BFA"/>
+    </marker>
+  </defs>
+
+  <!-- Main Background -->
+  <rect width="1600" height="1060" fill="url(#bgGrad)"/>
+
+  <!-- Subtle Grid Pattern -->
+  <g stroke="#1E293B" stroke-width="1" opacity="0.45">
+    <line x1="0" y1="120" x2="1600" y2="120"/>
+    <line x1="0" y1="300" x2="1600" y2="300"/>
+    <line x1="0" y1="500" x2="1600" y2="500"/>
+    <line x1="0" y1="700" x2="1600" y2="700"/>
+    <line x1="0" y1="900" x2="1600" y2="900"/>
+    <line x1="352" y1="0" x2="352" y2="1060"/>
+    <line x1="1008" y1="0" x2="1008" y2="1060"/>
+  </g>
+
+  <!-- ================= HEADER BANNER ================= -->
+  <rect x="25" y="18" width="1550" height="82" rx="14" fill="#0F172A" stroke="#334155" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="25" y="18" width="10" height="82" rx="5" fill="#0078D4"/>
+  <text x="52" y="52" fill="#F8FAFC" font-size="22" font-weight="800" letter-spacing="0.2">CLYVO VET WEB v2 — ARQUITETURA EM NUVEM &amp; ESTEIRA CI/CD (AZURE DEVOPS)</text>
+  <text x="52" y="79" fill="#94A3B8" font-size="13.5" font-weight="500">FIAP • 4ª Sprint DevOps Tools &amp; Cloud Computing + Java Advanced • Turma 2TDSR • Projeto: Sprint 4 – Azure DevOps</text>
+
+  <!-- Stack Badges in Header -->
+  <g transform="translate(1070, 32)">
+    <rect x="0" y="0" width="95" height="26" rx="6" fill="#1E3A8A" stroke="#3B82F6"/>
+    <text x="47" y="17" fill="#EFF6FF" font-size="11" font-weight="700" text-anchor="middle">Java 21 LTS</text>
+
+    <rect x="103" y="0" width="125" height="26" rx="6" fill="#064E3B" stroke="#10B981"/>
+    <text x="165" y="17" fill="#ECFDF5" font-size="11" font-weight="700" text-anchor="middle">Spring Boot 3.3.4</text>
+
+    <rect x="236" y="0" width="120" height="26" rx="6" fill="#0C4A6E" stroke="#0284C7"/>
+    <text x="296" y="17" fill="#F0F9FF" font-size="11" font-weight="700" text-anchor="middle">Azure Pipelines</text>
+
+    <rect x="364" y="0" width="120" height="26" rx="6" fill="#311042" stroke="#A855F7"/>
+    <text x="424" y="17" fill="#FAF5FF" font-size="11" font-weight="700" text-anchor="middle">PostgreSQL Cloud</text>
+
+    <rect x="0" y="32" width="155" height="24" rx="6" fill="#1E293B" stroke="#475569"/>
+    <text x="77" y="48" fill="#CBD5E1" font-size="11" font-weight="600" text-anchor="middle">113 Testes JUnit + Flyway</text>
+
+    <rect x="163" y="32" width="160" height="24" rx="6" fill="#1E293B" stroke="#475569"/>
+    <text x="243" y="48" fill="#CBD5E1" font-size="11" font-weight="600" text-anchor="middle">Azure Web App / ACI</text>
+
+    <rect x="331" y="32" width="153" height="24" rx="6" fill="#422006" stroke="#F59E0B"/>
+    <text x="407" y="48" fill="#FEF3C7" font-size="11" font-weight="700" text-anchor="middle">Secrets Protegidas 🔒</text>
+  </g>
+
+  <!-- ================= COLUMN 1: PERSONAS & AMBIENTE EXTERNO ================= -->
+  <rect x="25" y="118" width="315" height="802" rx="16" fill="url(#personaGrad)" stroke="#334155" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="25" y="118" width="315" height="44" rx="16" fill="#1E293B"/>
+  <text x="182" y="145" fill="#F8FAFC" font-size="14" font-weight="800" text-anchor="middle">👥 PERSONAS &amp; FERRAMENTAS DE ORIGEM</text>
+
+  <!-- Persona 1: Desenvolvedor -->
+  <g transform="translate(43, 178)">
+    <rect x="0" y="0" width="279" height="202" rx="12" fill="#0F172A" stroke="#38BDF8" stroke-width="1.8"/>
+    <rect x="0" y="0" width="279" height="32" rx="12" fill="#0369A1"/>
+    <text x="140" y="21" fill="#FFFFFF" font-size="12.5" font-weight="700" text-anchor="middle">👨‍💻 PERSONA 1: DESENVOLVEDOR (EQUIPE)</text>
+
+    <circle cx="42" cy="68" r="23" fill="#0284C7" stroke="#7DD3FC" stroke-width="2"/>
+    <text x="42" y="76" font-size="21" text-anchor="middle">💻</text>
+    <text x="76" y="58" fill="#F8FAFC" font-size="13" font-weight="700">Equipe 2TDSR (FIAP)</text>
+    <text x="76" y="75" fill="#94A3B8" font-size="11">Altera código Java / Thymeleaf</text>
+    <text x="76" y="90" fill="#38BDF8" font-size="10.5" font-weight="600">(Não altera apenas README)</text>
+
+    <rect x="12" y="104" width="255" height="84" rx="8" fill="#1E293B" stroke="#334155"/>
+    <text x="22" y="122" fill="#E2E8F0" font-size="11" font-weight="700">🛠️ Onde as ferramentas atuam:</text>
+    <text x="22" y="140" fill="#94A3B8" font-size="10.5">• <tspan fill="#F8FAFC" font-weight="600">IDE (IntelliJ / VS Code):</tspan> Edição código</text>
+    <text x="22" y="157" fill="#94A3B8" font-size="10.5">• <tspan fill="#F8FAFC" font-weight="600">Git CLI:</tspan> Commit/Push na branch <tspan fill="#38BDF8" font-weight="700">master</tspan></text>
+    <text x="22" y="174" fill="#94A3B8" font-size="10.5">• <tspan fill="#F8FAFC" font-weight="600">DBeaver / Azure Data Studio:</tspan> SQL</text>
+  </g>
+
+  <!-- Persona 2: Usuário Final -->
+  <g transform="translate(43, 402)">
+    <rect x="0" y="0" width="279" height="218" rx="12" fill="#0F172A" stroke="#34D399" stroke-width="1.8"/>
+    <rect x="0" y="0" width="279" height="32" rx="12" fill="#047857"/>
+    <text x="140" y="21" fill="#FFFFFF" font-size="12.5" font-weight="700" text-anchor="middle">🐾 PERSONA 2: USUÁRIO FINAL</text>
+
+    <circle cx="42" cy="68" r="23" fill="#059669" stroke="#6EE7B7" stroke-width="2"/>
+    <text x="42" y="76" font-size="21" text-anchor="middle">🧑‍⚕️</text>
+    <text x="76" y="58" fill="#F8FAFC" font-size="13" font-weight="700">Tutor de Pet &amp; Veterinário</text>
+    <text x="76" y="75" fill="#94A3B8" font-size="11">Acessa via Browser Desktop/Mobile</text>
+    <text x="76" y="90" fill="#34D399" font-size="10.5" font-weight="600">Executa o CRUD Completo em Nuvem</text>
+
+    <rect x="12" y="104" width="255" height="100" rx="8" fill="#1E293B" stroke="#334155"/>
+    <text x="22" y="122" fill="#E2E8F0" font-size="11" font-weight="700">🌐 Operações Realizadas (HTTPS):</text>
+    <text x="22" y="140" fill="#94A3B8" font-size="10.5">• <tspan fill="#34D399" font-weight="700">CREATE:</tspan> Cadastra Novo Pet / Check-in</text>
+    <text x="22" y="157" fill="#94A3B8" font-size="10.5">• <tspan fill="#38BDF8" font-weight="700">READ:</tspan> Consulta Prontuário &amp; Triagem IA</text>
+    <text x="22" y="174" fill="#94A3B8" font-size="10.5">• <tspan fill="#FBBF24" font-weight="700">UPDATE:</tspan> Atualiza Peso e Biometria Pet</text>
+    <text x="22" y="191" fill="#94A3B8" font-size="10.5">• <tspan fill="#FB7185" font-weight="700">DELETE:</tspan> Exclui Registro de Pet</text>
+  </g>
+
+  <!-- Persona 3: Professor / Avaliador -->
+  <g transform="translate(43, 642)">
+    <rect x="0" y="0" width="279" height="175" rx="12" fill="#0F172A" stroke="#FBBF24" stroke-width="1.8"/>
+    <rect x="0" y="0" width="279" height="32" rx="12" fill="#B45309"/>
+    <text x="140" y="21" fill="#FFFFFF" font-size="12.5" font-weight="700" text-anchor="middle">🎓 PERSONA 3: PROFESSOR (AVALIADOR)</text>
+
+    <circle cx="42" cy="68" r="23" fill="#D97706" stroke="#FDE68A" stroke-width="2"/>
+    <text x="42" y="76" font-size="21" text-anchor="middle">🔍</text>
+    <text x="76" y="58" fill="#F8FAFC" font-size="13" font-weight="700">Prof. João Menk (FIAP)</text>
+    <text x="76" y="75" fill="#FDE68A" font-size="10.5" font-weight="700">Permissão: Nível "Basic" (Convidado)</text>
+    <text x="76" y="90" fill="#94A3B8" font-size="10.5">Audita Repos, Pipelines e Boards</text>
+
+    <rect x="12" y="104" width="255" height="56" rx="8" fill="#1E293B" stroke="#334155"/>
+    <text x="22" y="123" fill="#E2E8F0" font-size="11" font-weight="700">📋 Projeto: Sprint 4 – Azure DevOps</text>
+    <text x="22" y="142" fill="#94A3B8" font-size="10.5">Visibility: Private • Git • Processo: Scrum</text>
+  </g>
+
+  <!-- ================= COLUMN 2: AZURE DEVOPS (CI/CD ENGINE) ================= -->
+  <rect x="365" y="118" width="630" height="802" rx="16" fill="url(#azDevopsGrad)" stroke="#0284C7" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="365" y="118" width="630" height="44" rx="16" fill="#0369A1"/>
+  <text x="680" y="145" fill="#FFFFFF" font-size="15.5" font-weight="800" text-anchor="middle">🚀 AZURE DEVOPS ORGANIZATION — PROJECT: "Sprint 4 – Azure DevOps"</text>
+
+  <!-- Sub-box 2.1: Git Repository -->
+  <g transform="translate(388, 176)">
+    <rect x="0" y="0" width="584" height="88" rx="12" fill="#0F172A" stroke="#38BDF8" stroke-width="1.5"/>
+    <rect x="14" y="12" width="62" height="62" rx="10" fill="#1E3A8A"/>
+    <text x="45" y="51" font-size="28" text-anchor="middle">📦</text>
+    <text x="88" y="30" fill="#38BDF8" font-size="13.5" font-weight="800">CONTROLE DE VERSÃO GIT (GitHub / Azure Repos Conectado)</text>
+    <text x="88" y="50" fill="#F8FAFC" font-size="11.5" font-weight="600">Repositório: clyvo-vet-web-v2 • Branch Principal de Disparo: <tspan fill="#FBBF24" font-weight="800">master</tspan></text>
+    <text x="88" y="68" fill="#94A3B8" font-size="10.5">Ferramentas: Git + Webhook CI (Trigger automático a cada push na branch master)</text>
+  </g>
+
+  <!-- Sub-box 2.2: CI STAGE (Continuous Integration) -->
+  <g transform="translate(388, 286)">
+    <rect x="0" y="0" width="584" height="270" rx="14" fill="url(#ciCardGrad)" stroke="#38BDF8" stroke-width="2"/>
+    <rect x="0" y="0" width="584" height="34" rx="14" fill="#0284C7"/>
+    <text x="16" y="22" fill="#FFFFFF" font-size="12.5" font-weight="800">⚙️ STAGE 1: CONTINUOUS INTEGRATION (CI)</text>
+    <text x="568" y="22" fill="#E0F2FE" font-size="10.5" font-weight="700" text-anchor="end">Pool: ubuntu-latest • Build, Test &amp; Artifact</text>
+
+    <!-- CI Step 3: Build -->
+    <rect x="16" y="48" width="176" height="152" rx="10" fill="#0F172A" stroke="#475569" stroke-width="1.2"/>
+    <text x="104" y="70" fill="#38BDF8" font-size="12.5" font-weight="800" text-anchor="middle">1. BUILD &amp; COMPILE</text>
+    <text x="104" y="88" fill="#F8FAFC" font-size="10.5" font-weight="700" text-anchor="middle">Maven@4 + JDK 21</text>
+    <line x1="28" y1="98" x2="180" y2="98" stroke="#334155"/>
+    <text x="24" y="116" fill="#CBD5E1" font-size="10.5">• <tspan fill="#38BDF8">JavaToolInstaller@0</tspan></text>
+    <text x="24" y="133" fill="#CBD5E1" font-size="10.5">• Baixa dependências</text>
+    <text x="24" y="150" fill="#CBD5E1" font-size="10.5">• Compila classes Java 21</text>
+    <text x="24" y="167" fill="#CBD5E1" font-size="10.5">• Valida migrações Flyway</text>
+    <rect x="26" y="177" width="156" height="16" rx="4" fill="#1E293B"/>
+    <text x="104" y="189" fill="#7DD3FC" font-size="9.5" font-family="monospace" text-anchor="middle">mvn clean compile</text>
+
+    <!-- CI Step 4: Automated Tests -->
+    <rect x="204" y="48" width="176" height="152" rx="10" fill="#0F172A" stroke="#34D399" stroke-width="1.5"/>
+    <text x="292" y="70" fill="#34D399" font-size="12.5" font-weight="800" text-anchor="middle">2. TESTES AUTOMÁTICOS</text>
+    <text x="292" y="88" fill="#F8FAFC" font-size="10.5" font-weight="700" text-anchor="middle">JUnit 5 + MockMvc</text>
+    <line x1="216" y1="98" x2="368" y2="98" stroke="#334155"/>
+    <text x="212" y="116" fill="#CBD5E1" font-size="10.5">• Executa <tspan fill="#34D399" font-weight="700">113 Testes</tspan></text>
+    <text x="212" y="133" fill="#CBD5E1" font-size="10.5">• RBAC, Anti-IDOR, CRUD</text>
+    <text x="212" y="150" fill="#CBD5E1" font-size="10.5">• <tspan fill="#34D399">PublishTestResults@2</tspan></text>
+    <text x="212" y="167" fill="#CBD5E1" font-size="10.5">• Relatório Surefire XML</text>
+    <rect x="214" y="177" width="156" height="16" rx="4" fill="#064E3B"/>
+    <text x="292" y="189" fill="#6EE7B7" font-size="9.5" font-family="monospace" text-anchor="middle">113/113 PASS (0 Fail)</text>
+
+    <!-- CI Step 5: Artifact Publish -->
+    <rect x="392" y="48" width="176" height="152" rx="10" fill="#0F172A" stroke="#FBBF24" stroke-width="1.5"/>
+    <text x="480" y="70" fill="#FBBF24" font-size="12.5" font-weight="800" text-anchor="middle">3. GERAR ARTEFATO</text>
+    <text x="480" y="88" fill="#F8FAFC" font-size="10.5" font-weight="700" text-anchor="middle">Spring Boot Executable JAR</text>
+    <line x1="404" y1="98" x2="556" y2="98" stroke="#334155"/>
+    <text x="400" y="116" fill="#CBD5E1" font-size="10.5">• <tspan fill="#FBBF24">CopyFiles@2</tspan> (staging)</text>
+    <text x="400" y="133" fill="#CBD5E1" font-size="10.5">• <tspan fill="#FBBF24">PublishBuildArtifacts@1</tspan></text>
+    <text x="400" y="150" fill="#CBD5E1" font-size="10.5">• Publica artefato <tspan fill="#FDE68A" font-weight="700">drop</tspan></text>
+    <text x="400" y="167" fill="#CBD5E1" font-size="10.5">• Salvo no Azure DevOps</text>
+    <rect x="402" y="177" width="156" height="16" rx="4" fill="#422006"/>
+    <text x="480" y="189" fill="#FDE68A" font-size="9.5" font-family="monospace" text-anchor="middle">clyvo-vet-web-v2.jar</text>
+
+    <!-- Bottom bar inside CI -->
+    <rect x="16" y="210" width="552" height="46" rx="8" fill="#09192B" stroke="#1E3A8A"/>
+    <text x="292" y="229" fill="#93C5FD" font-size="9.5" font-weight="700" text-anchor="middle">✅ Evidências no CI: Aba "Tests" (113 JUnit Tests) + Aba "Published" (Artefato: drop/clyvo-vet-web-v2.jar)</text>
+    <text x="292" y="246" fill="#94A3B8" font-size="9" text-anchor="middle">Regras atendidas: II (Trigger master), V (Publicação do Artefato no Azure DevOps), VI (Execução de testes)</text>
+  </g>
+
+  <!-- Sub-box 2.3: Protected Variables / Library Secrets -->
+  <g transform="translate(388, 576)">
+    <rect x="0" y="0" width="584" height="80" rx="12" fill="#27170A" stroke="#F59E0B" stroke-width="1.8"/>
+    <text x="18" y="24" fill="#FBBF24" font-size="12" font-weight="800">🔒 VARIÁVEIS PROTEGIDAS (Pipelines &gt; Library: clyvo-sprint4-secrets)</text>
+    <text x="18" y="44" fill="#FDE68A" font-size="10">Dados sensíveis ocultos com cadeado (Secret Variables — Regra IV): nunca expostos em logs</text>
+    <text x="18" y="63" fill="#94A3B8" font-size="9.5" font-family="monospace">DB_URL=****** | DB_USER=****** | DB_PASSWORD=****** | SPRING_PROFILES_ACTIVE=prod</text>
+  </g>
+
+  <!-- Sub-box 2.4: CD STAGE (Continuous Deployment) -->
+  <g transform="translate(388, 676)">
+    <rect x="0" y="0" width="584" height="222" rx="14" fill="url(#cdCardGrad)" stroke="#34D399" stroke-width="2"/>
+    <rect x="0" y="0" width="584" height="34" rx="14" fill="#059669"/>
+    <text x="16" y="22" fill="#FFFFFF" font-size="12.5" font-weight="800">🚀 STAGE 2: CONTINUOUS DEPLOYMENT (CD)</text>
+    <text x="568" y="22" fill="#D1FAE5" font-size="10.5" font-weight="700" text-anchor="end">dependsOn: CI_Build_Test • Deploy Automático</text>
+
+    <rect x="16" y="48" width="268" height="115" rx="10" fill="#0F172A" stroke="#34D399" stroke-width="1.2"/>
+    <text x="150" y="69" fill="#34D399" font-size="11.5" font-weight="800" text-anchor="middle">1. DOWNLOAD ARTEFATO &amp; SECRETS</text>
+    <text x="26" y="90" fill="#CBD5E1" font-size="10.5">• Dispara após novo artefato gerado</text>
+    <text x="26" y="108" fill="#CBD5E1" font-size="10.5">• Task: <tspan fill="#34D399">DownloadBuildArtifacts@1</tspan> (<tspan fill="#FDE68A">drop</tspan>)</text>
+    <text x="26" y="126" fill="#CBD5E1" font-size="10.5">• Injeta variáveis secretas com cadeado</text>
+    <text x="26" y="144" fill="#CBD5E1" font-size="10.5">• Autentica via <tspan fill="#38BDF8">Azure Service Connection</tspan></text>
+
+    <rect x="300" y="48" width="268" height="115" rx="10" fill="#0F172A" stroke="#38BDF8" stroke-width="1.2"/>
+    <text x="434" y="69" fill="#38BDF8" font-size="11.5" font-weight="800" text-anchor="middle">2. PROVISIONAMENTO &amp; DEPLOY AZURE</text>
+    <text x="310" y="90" fill="#CBD5E1" font-size="10.5">• Task: <tspan fill="#38BDF8">AzureWebApp@1</tspan> / <tspan fill="#38BDF8">AzureCLI@2</tspan></text>
+    <text x="310" y="108" fill="#CBD5E1" font-size="10.5">• Deploy JAR no <tspan fill="#F8FAFC" font-weight="700">Azure Web App (Java 21)</tspan></text>
+    <text x="310" y="126" fill="#CBD5E1" font-size="10.5">• Ou atualiza container no <tspan fill="#F8FAFC" font-weight="700">Azure ACI</tspan></text>
+    <text x="310" y="144" fill="#CBD5E1" font-size="10.5">• Configura App Settings seguras</text>
+
+    <rect x="16" y="173" width="552" height="36" rx="8" fill="#062E2B" stroke="#059669"/>
+    <text x="292" y="195" fill="#A7F3D0" font-size="9.5" font-weight="700" text-anchor="middle">✅ Regras atendidas: III (CD dispara após novo artefato), IV (Secrets protegidas), VII (Deploy Web App / ACI)</text>
+  </g>
+
+  <!-- ================= COLUMN 3: MICROSOFT AZURE CLOUD (PRODUÇÃO) ================= -->
+  <rect x="1020" y="118" width="555" height="802" rx="16" fill="url(#azureCloudGrad)" stroke="#0078D4" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="1020" y="118" width="555" height="44" rx="16" fill="#0078D4"/>
+  <text x="1297" y="145" fill="#FFFFFF" font-size="15.5" font-weight="800" text-anchor="middle">☁️ MICROSOFT AZURE CLOUD — Resource Group: rg-clyvo-sprint4</text>
+
+  <!-- Sub-box 3.1: Compute Layer (Azure Web App / ACI) -->
+  <g transform="translate(1042, 178)">
+    <rect x="0" y="0" width="511" height="292" rx="14" fill="#0F172A" stroke="#38BDF8" stroke-width="2"/>
+    <rect x="0" y="0" width="511" height="34" rx="14" fill="#0284C7"/>
+    <text x="255" y="22" fill="#FFFFFF" font-size="13" font-weight="800" text-anchor="middle">🌐 CAMADA DE APLICAÇÃO: AZURE WEB APP (PaaS) / ACI</text>
+
+    <rect x="14" y="46" width="483" height="84" rx="10" fill="#1E293B" stroke="#38BDF8"/>
+    <text x="26" y="67" fill="#38BDF8" font-size="12.5" font-weight="800">☕ Clyvo Vet Web v2 — Runtime Java 21 LTS (Spring Boot 3.3.4)</text>
+    <text x="26" y="86" fill="#E2E8F0" font-size="10.5">• URL Pública: <tspan fill="#34D399" font-family="monospace" font-weight="700">https://app-clyvo-vet-sprint4.azurewebsites.net</tspan></text>
+    <text x="26" y="104" fill="#94A3B8" font-size="10.5">• Profile Ativo: <tspan fill="#FBBF24" font-family="monospace">SPRING_PROFILES_ACTIVE=prod</tspan> (Zero localhost / 100% Cloud)</text>
+    <text x="26" y="121" fill="#94A3B8" font-size="10.5">• Módulos: Auth RBAC, Prontuário Pet, Check-in, Triagem IA (CDSS), Checkout PIX</text>
+
+    <!-- Internal Architecture Layers -->
+    <rect x="14" y="142" width="153" height="74" rx="8" fill="#09192B" stroke="#334155"/>
+    <text x="90" y="162" fill="#7DD3FC" font-size="10.5" font-weight="700" text-anchor="middle">Presentation Layer</text>
+    <text x="90" y="179" fill="#CBD5E1" font-size="9.5" text-anchor="middle">Thymeleaf + Bootstrap 5</text>
+    <text x="90" y="195" fill="#CBD5E1" font-size="9.5" text-anchor="middle">Controllers MVC + REST</text>
+    <text x="90" y="209" fill="#94A3B8" font-size="9" text-anchor="middle">Spring Security 6 + CSRF</text>
+
+    <rect x="179" y="142" width="153" height="74" rx="8" fill="#09192B" stroke="#334155"/>
+    <text x="255" y="162" fill="#6EE7B7" font-size="10.5" font-weight="700" text-anchor="middle">Business &amp; AI Layer</text>
+    <text x="255" y="179" fill="#CBD5E1" font-size="9.5" text-anchor="middle">Dual-Engine CDSS (ML)</text>
+    <text x="255" y="195" fill="#CBD5E1" font-size="9.5" text-anchor="middle">SplitFinanceiroCalculator</text>
+    <text x="255" y="209" fill="#94A3B8" font-size="9" text-anchor="middle">Bean Validation</text>
+
+    <rect x="344" y="142" width="153" height="74" rx="8" fill="#09192B" stroke="#334155"/>
+    <text x="420" y="162" fill="#FDE68A" font-size="10.5" font-weight="700" text-anchor="middle">Persistence Layer</text>
+    <text x="420" y="179" fill="#CBD5E1" font-size="9.5" text-anchor="middle">Spring Data JPA / Hibernate</text>
+    <text x="420" y="195" fill="#CBD5E1" font-size="9.5" text-anchor="middle">Flyway (V1..V15 Migrations)</text>
+    <text x="420" y="209" fill="#94A3B8" font-size="9" text-anchor="middle">HikariCP Connection Pool</text>
+
+    <rect x="14" y="228" width="483" height="50" rx="8" fill="#172554" stroke="#3B82F6"/>
+    <text x="255" y="248" fill="#EFF6FF" font-size="10.5" font-weight="700" text-anchor="middle">🔄 Vídeo: Alteração de Código (Título/Badge Visível) ➔ Commit ➔ Deploy Automático</text>
+    <text x="255" y="266" fill="#93C5FD" font-size="9.5" text-anchor="middle">Suporta Azure App Service (Web App Linux Java 21) ou Azure Container Instances (ACI)</text>
+  </g>
+
+  <!-- Sub-box 3.2: Cloud Database Layer (PostgreSQL PaaS / Container) -->
+  <g transform="translate(1042, 506)">
+    <rect x="0" y="0" width="511" height="256" rx="14" fill="url(#dbCardGrad)" stroke="#A78BFA" stroke-width="2"/>
+    <rect x="0" y="0" width="511" height="34" rx="14" fill="#6D28D9"/>
+    <text x="255" y="22" fill="#FFFFFF" font-size="13" font-weight="800" text-anchor="middle">🛢️ BANCO DE DADOS EM NUVEM: POSTGRESQL (PaaS / Container Cloud)</text>
+
+    <rect x="14" y="46" width="483" height="84" rx="10" fill="#0F172A" stroke="#8B5CF6"/>
+    <text x="26" y="67" fill="#C4B5FD" font-size="12.5" font-weight="800">🐘 Azure Database for PostgreSQL Flexible Server / PostgreSQL Cloud</text>
+    <text x="26" y="86" fill="#E2E8F0" font-size="10">• JDBC/TLS: <tspan fill="#A78BFA" font-family="monospace">jdbc:postgresql://&lt;host-cloud&gt;:5432/clyvodb?sslmode=require</tspan></text>
+    <text x="26" y="104" fill="#94A3B8" font-size="10">• Modelagem Relacional em <tspan fill="#F8FAFC" font-weight="700">3ª Forma Normal (3FN)</tspan> com <tspan fill="#FBBF24" font-weight="700">15 Migrações Flyway</tspan></text>
+    <text x="26" y="121" fill="#94A3B8" font-size="9.5">• Tabelas Core: <tspan fill="#34D399" font-family="monospace">t_usuario, t_tutor, t_pet, t_raca, t_checkin_diario, t_consulta_triagem</tspan></text>
+
+    <!-- SQL Evidence Box -->
+    <rect x="14" y="142" width="483" height="100" rx="10" fill="#090D16" stroke="#34D399" stroke-width="1.5"/>
+    <text x="24" y="162" fill="#34D399" font-size="10.5" font-weight="800">🔎 EVIDÊNCIA OBRIGATÓRIA DE PERSISTÊNCIA NO VÍDEO (SELECT NO BANCO):</text>
+    <text x="24" y="181" fill="#E2E8F0" font-size="9.5" font-family="monospace">1. CREATE: <tspan fill="#6EE7B7">SELECT id, nome, peso, tutor_id FROM t_pet ORDER BY id DESC;</tspan></text>
+    <text x="24" y="199" fill="#E2E8F0" font-size="9.5" font-family="monospace">2. READ:   <tspan fill="#7DD3FC">SELECT p.id, p.nome, t.nome AS tutor FROM t_pet p JOIN t_tutor t;</tspan></text>
+    <text x="24" y="217" fill="#E2E8F0" font-size="9.5" font-family="monospace">3. UPDATE: <tspan fill="#FDE68A">SELECT id, nome, peso FROM t_pet WHERE id = &lt;id_criado&gt;;</tspan></text>
+    <text x="24" y="235" fill="#E2E8F0" font-size="9.5" font-family="monospace">4. DELETE: <tspan fill="#FDA4AF">SELECT COUNT(*) FROM t_pet WHERE id = &lt;id_deletado&gt;; -- Retorna 0</tspan></text>
+  </g>
+
+  <!-- Sub-box 3.3: Observability & Portal Evidence -->
+  <g transform="translate(1042, 780)">
+    <rect x="0" y="0" width="511" height="118" rx="12" fill="#0F172A" stroke="#64748B" stroke-width="1.5"/>
+    <text x="20" y="24" fill="#38BDF8" font-size="12" font-weight="800">📊 MONITORAMENTO &amp; GOVERNANÇA NO PORTAL DO AZURE</text>
+    <text x="20" y="45" fill="#CBD5E1" font-size="10">• <tspan fill="#F8FAFC" font-weight="700">Azure Portal:</tspan> Resource Group, App Service / ACI, Activity Log e Deployment Center</text>
+    <text x="20" y="64" fill="#CBD5E1" font-size="10">• <tspan fill="#F8FAFC" font-weight="700">Health Check:</tspan> Verificação de integridade HTTP na porta configurada (<tspan fill="#38BDF8" font-family="monospace">PORT=8080</tspan>)</text>
+    <text x="20" y="83" fill="#CBD5E1" font-size="10">• <tspan fill="#F8FAFC" font-weight="700">Segurança:</tspan> Firewall do Banco Cloud liberado para Azure + IP do Dev para SELECT</text>
+    <text x="20" y="102" fill="#94A3B8" font-size="9">Evita penalidades: -10 pts (mostrar recursos no portal), -30 pts (SELECT no banco), -30 pts (deploy)</text>
+  </g>
+
+  <!-- ================= NUMBERED ARROWS & CONNECTIONS (1 TO 10) ================= -->
+
+  <!-- ① Dev -> Git Repo -->
+  <path d="M 322 235 L 385 220" fill="none" stroke="#38BDF8" stroke-width="3" marker-end="url(#arrowBlue)"/>
+  <circle cx="353" cy="227" r="14" fill="#0284C7" stroke="#FFFFFF" stroke-width="2"/>
+  <text x="353" y="232" fill="#FFFFFF" font-size="12.5" font-weight="800" text-anchor="middle">1</text>
+
+  <!-- ② Git Repo -> CI Stage -->
+  <path d="M 680 264 L 680 284" fill="none" stroke="#38BDF8" stroke-width="3" marker-end="url(#arrowBlue)"/>
+  <circle cx="655" cy="274" r="13" fill="#0284C7" stroke="#FFFFFF" stroke-width="2"/>
+  <text x="655" y="279" fill="#FFFFFF" font-size="12" font-weight="800" text-anchor="middle">2</text>
+
+  <!-- ③ Build -> ④ Test -> ⑤ Artifact inside CI -->
+  <circle cx="492" cy="326" r="13" fill="#0284C7" stroke="#FFFFFF" stroke-width="1.8"/>
+  <text x="492" y="331" fill="#FFFFFF" font-size="12" font-weight="800" text-anchor="middle">3</text>
+
+  <circle cx="680" cy="326" r="13" fill="#059669" stroke="#FFFFFF" stroke-width="1.8"/>
+  <text x="680" y="331" fill="#FFFFFF" font-size="12" font-weight="800" text-anchor="middle">4</text>
+
+  <circle cx="868" cy="326" r="13" fill="#D97706" stroke="#FFFFFF" stroke-width="1.8"/>
+  <text x="868" y="331" fill="#FFFFFF" font-size="12" font-weight="800" text-anchor="middle">5</text>
+
+  <!-- ⑥ CI & Secrets -> CD Stage -->
+  <path d="M 680 556 L 680 574" fill="none" stroke="#FBBF24" stroke-width="2.8" marker-end="url(#arrowAmber)"/>
+  <path d="M 680 656 L 680 674" fill="none" stroke="#34D399" stroke-width="2.8" marker-end="url(#arrowGreen)"/>
+  <circle cx="655" cy="665" r="13" fill="#059669" stroke="#FFFFFF" stroke-width="2"/>
+  <text x="655" y="670" fill="#FFFFFF" font-size="12" font-weight="800" text-anchor="middle">6</text>
+
+  <!-- ⑦ CD Stage -> Azure Web App / ACI -->
+  <path d="M 972 780 L 1007 780 L 1007 310 L 1040 310" fill="none" stroke="#34D399" stroke-width="3.2" stroke-dasharray="6,3" marker-end="url(#arrowGreen)"/>
+  <circle cx="1007" cy="540" r="14" fill="#059669" stroke="#FFFFFF" stroke-width="2"/>
+  <text x="1007" y="545" fill="#FFFFFF" font-size="12.5" font-weight="800" text-anchor="middle">7</text>
+
+  <!-- ⑧ Azure Web App -> PostgreSQL Cloud DB -->
+  <path d="M 1297 470 L 1297 504" fill="none" stroke="#A78BFA" stroke-width="3.2" marker-end="url(#arrowPurple)"/>
+  <circle cx="1272" cy="487" r="13" fill="#6D28D9" stroke="#FFFFFF" stroke-width="2"/>
+  <text x="1272" y="492" fill="#FFFFFF" font-size="12" font-weight="800" text-anchor="middle">8</text>
+  <text x="1312" y="492" fill="#C4B5FD" font-size="10.5" font-weight="700">JDBC / Flyway + CRUD SQL (TCP 5432)</text>
+
+  <!-- ⑨ End User -> Azure Web App (HTTPS CRUD) -->
+  <path d="M 322 505 L 352 505 L 352 936 L 1007 936 L 1007 245 L 1040 245" fill="none" stroke="#34D399" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+  <circle cx="352" cy="505" r="13" fill="#047857" stroke="#FFFFFF" stroke-width="2"/>
+  <text x="352" y="510" fill="#FFFFFF" font-size="12" font-weight="800" text-anchor="middle">9</text>
+
+  <!-- ⑩ Professor / Dev -> Direct SELECT on Cloud DB & Audit -->
+  <path d="M 322 735 L 340 735 L 340 952 L 1030 952 L 1030 640 L 1040 640" fill="none" stroke="#FBBF24" stroke-width="2.5" stroke-dasharray="5,4" marker-end="url(#arrowAmber)"/>
+  <circle cx="340" cy="735" r="13" fill="#B45309" stroke="#FFFFFF" stroke-width="2"/>
+  <text x="340" y="740" fill="#FFFFFF" font-size="11.5" font-weight="800" text-anchor="middle">10</text>
+
+  <!-- ================= BOTTOM LEGEND: NUMERICAL CI/CD & ARCHITECTURE FLOW ================= -->
+  <rect x="25" y="968" width="1550" height="74" rx="12" fill="#0F172A" stroke="#334155" stroke-width="1.5"/>
+  <text x="45" y="991" fill="#38BDF8" font-size="12" font-weight="800">🔢 ORDEM NUMERADA DO FLUXO DA ESTEIRA CI/CD E OPERAÇÃO EM NUVEM:</text>
+  <text x="45" y="1011" fill="#E2E8F0" font-size="11">
+    <tspan fill="#38BDF8" font-weight="700">①</tspan> Dev faz commit/push na branch <tspan font-family="monospace">master</tspan> ➔
+    <tspan fill="#38BDF8" font-weight="700">②</tspan> Trigger CI dispara Azure Pipelines ➔
+    <tspan fill="#38BDF8" font-weight="700">③</tspan> Build Maven + Java 21 ➔
+    <tspan fill="#34D399" font-weight="700">④</tspan> Executa e publica 113 Testes JUnit ➔
+    <tspan fill="#FBBF24" font-weight="700">⑤</tspan> Empacota e publica Artefato JAR (<tspan font-family="monospace">drop</tspan>)
+  </text>
+  <text x="45" y="1030" fill="#E2E8F0" font-size="11">
+    <tspan fill="#34D399" font-weight="700">⑥</tspan> Novo artefato dispara CD + lê Variáveis Protegidas 🔒 ➔
+    <tspan fill="#34D399" font-weight="700">⑦</tspan> Deploy automático no Azure Web App / ACI ➔
+    <tspan fill="#A78BFA" font-weight="700">⑧</tspan> App conecta ao PostgreSQL Cloud (Flyway 3FN) ➔
+    <tspan fill="#34D399" font-weight="700">⑨</tspan> Usuário executa CRUD via HTTPS ➔
+    <tspan fill="#FBBF24" font-weight="700">⑩</tspan> Evidência via <tspan font-family="monospace">SELECT</tspan> no Banco Cloud
+  </text>
+</svg>

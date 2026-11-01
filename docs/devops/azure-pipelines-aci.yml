@@ -1,0 +1,132 @@
+# ==============================================================================
+# FIAP — 4ª SPRINT: DEVOPS TOOLS & CLOUD COMPUTING (OPÇÃO ALTERNATIVA: ACR + ACI)
+# Projeto: Sprint 4 – Azure DevOps (Clyvo Vet Web v2)
+# Use este arquivo caso prefira provisionar no Azure Container Instance (ACI)
+# em vez do Azure Web App (ambos são oficialmente aceitos na Regra VII).
+# ==============================================================================
+
+trigger:
+  branches:
+    include:
+      - master
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  - group: clyvo-sprint4-secrets
+  - name: ARTIFACT_NAME
+    value: 'drop'
+
+stages:
+  - stage: CI
+    displayName: 'Stage 1 (CI): Build, 113 Testes Automatizados e Artefato'
+    jobs:
+      - job: BuildAndTestJob
+        displayName: 'CI Job: Compilar Java 21, Rodar Testes JUnit e Publicar Artefato'
+        steps:
+          - checkout: self
+            displayName: '1. Checkout do Repositório (branch master)'
+
+          - task: JavaToolInstaller@0
+            displayName: '2. Configurar JDK 21 LTS'
+            inputs:
+              versionSpec: '21'
+              jdkArchitectureOption: 'x64'
+              jdkSourceOption: 'PreInstalled'
+
+          - task: Maven@4
+            displayName: '3. Executar Build + 113 Testes Automatizados (mvn clean test)'
+            inputs:
+              mavenPomFile: 'pom.xml'
+              goals: 'clean test'
+              options: '-B'
+              publishJUnitResults: true
+              testResultsFiles: '**/surefire-reports/TEST-*.xml'
+              testRunTitle: 'Clyvo Vet v2 - Suíte JUnit 5 (113 Testes)'
+              javaHomeOption: 'JDKVersion'
+              jdkVersionOption: '1.21'
+
+          - task: Maven@4
+            displayName: '4. Empacotar Artefato JAR (mvn package -DskipTests)'
+            inputs:
+              mavenPomFile: 'pom.xml'
+              goals: 'package'
+              options: '-B -DskipTests'
+              javaHomeOption: 'JDKVersion'
+              jdkVersionOption: '1.21'
+
+          - task: CopyFiles@2
+            displayName: '5. Copiar JAR e Dockerfile para Staging'
+            inputs:
+              SourceFolder: '$(System.DefaultWorkingDirectory)'
+              Contents: |
+                target/*.jar
+                Dockerfile
+              TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+          - task: PublishBuildArtifacts@1
+            displayName: '6. Publicar Artefato no Azure DevOps (drop)'
+            inputs:
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              ArtifactName: '$(ARTIFACT_NAME)'
+              publishLocation: 'Container'
+
+  - stage: CD
+    displayName: 'Stage 2 (CD): Deploy Automático em Azure Container Instance (ACI)'
+    dependsOn: CI
+    condition: succeeded('CI')
+    jobs:
+      - deployment: DeployToACI
+        displayName: 'CD Job: Build ACR + Deploy no Azure Container Instance'
+        environment: 'producao-azure-sprint4'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+                  displayName: '1. Checkout para contexto Docker'
+
+                - task: DownloadBuildArtifacts@1
+                  displayName: '2. Baixar Artefato Publicado pelo CI (drop)'
+                  inputs:
+                    buildType: 'current'
+                    downloadType: 'single'
+                    artifactName: '$(ARTIFACT_NAME)'
+                    downloadPath: '$(System.ArtifactsDirectory)'
+
+                - task: AzureCLI@2
+                  displayName: '3. Build no ACR e Deploy no Azure Container Instance (ACI)'
+                  inputs:
+                    azureSubscription: '$(AZURE_SERVICE_CONNECTION)'
+                    scriptType: 'bash'
+                    scriptLocation: 'inlineScript'
+                    inlineScript: |
+                      set -e
+                      echo "Construindo imagem no Azure Container Registry ($(ACR_NAME))..."
+                      az acr build --registry "$(ACR_NAME)" --image clyvo-vet-web:latest .
+
+                      ACR_SERVER=$(az acr show --name "$(ACR_NAME)" --resource-group "$(AZURE_RESOURCE_GROUP)" --query loginServer -o tsv)
+                      ACR_USER=$(az acr credential show --name "$(ACR_NAME)" --query username -o tsv)
+                      ACR_PASS=$(az acr credential show --name "$(ACR_NAME)" --query "passwords[0].value" -o tsv)
+
+                      echo "Provisionando Azure Container Instance (ACI) conectado ao PostgreSQL Cloud..."
+                      az container create \
+                        --resource-group "$(AZURE_RESOURCE_GROUP)" \
+                        --name "$(ACI_CONTAINER_NAME)" \
+                        --image "${ACR_SERVER}/clyvo-vet-web:latest" \
+                        --registry-login-server "${ACR_SERVER}" \
+                        --registry-username "${ACR_USER}" \
+                        --registry-password "${ACR_PASS}" \
+                        --dns-name-label "$(ACI_DNS_LABEL)" \
+                        --ports 8095 \
+                        --os-type Linux \
+                        --cpu 1.5 --memory 2.5 \
+                        --environment-variables \
+                          SPRING_PROFILES_ACTIVE=prod \
+                          PORT=8095 \
+                        --secure-environment-variables \
+                          DB_URL="$(DB_URL)" \
+                          DB_USER="$(DB_USER)" \
+                          DB_PASSWORD="$(DB_PASSWORD)"
