@@ -29,10 +29,6 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  # Grupo de variáveis protegidas com cadeado (Pipelines -> Library -> clyvo-sprint4-secrets)
-  # Contém: DB_URL (🔒), DB_USER (🔒), DB_PASSWORD (🔒), KUDU_USER (🔒), KUDU_PASSWORD (🔒),
-  #         AZURE_WEBAPP_NAME, AZURE_RESOURCE_GROUP, SPRING_PROFILES_ACTIVE
-  - group: clyvo-sprint4-secrets
   - name: MAVEN_CACHE_FOLDER
     value: $(Pipeline.Workspace)/.m2/repository
   - name: MAVEN_OPTS
@@ -79,7 +75,7 @@ stages:
             inputs:
               mavenPomFile: 'pom.xml'
               goals: 'clean test'
-              options: '-B $(MAVEN_OPTS)'
+              options: '-B -Dspring.profiles.active=default $(MAVEN_OPTS)'
               publishJUnitResults: true
               testResultsFiles: '**/surefire-reports/TEST-*.xml'
               testRunTitle: 'Clyvo Vet v2 - Suíte JUnit 5 (113 Testes)'
@@ -120,51 +116,58 @@ stages:
     displayName: 'Stage 2 (CD): Deploy Automático na Microsoft Azure'
     dependsOn: CI
     condition: succeeded('CI')
+    variables:
+      # Grupo de variáveis protegidas com cadeado (Pipelines -> Library -> clyvo-sprint4-secrets)
+      # Contém: DB_URL (🔒), DB_USER (🔒), DB_PASSWORD (🔒), KUDU_USER (🔒), KUDU_PASSWORD (🔒)
+      - group: clyvo-sprint4-secrets
     jobs:
-      - deployment: DeployToAzureCloud
+      - job: DeployToAzureCloud
         displayName: 'CD Job: Publicar Artefato no Azure Web App (Java 21 + PostgreSQL Cloud)'
-        environment: 'producao-azure-sprint4'
-        strategy:
-          runOnce:
-            deploy:
-              steps:
-                # Passo 1: Download do novo artefato gerado pelo CI (Regra III)
-                - task: DownloadBuildArtifacts@1
-                  displayName: '1. Baixar Novo Artefato Publicado pelo CI (drop)'
-                  inputs:
-                    buildType: 'current'
-                    downloadType: 'single'
-                    artifactName: '$(ARTIFACT_NAME)'
-                    downloadPath: '$(System.ArtifactsDirectory)'
+        steps:
+          # Passo 1: Download do novo artefato gerado pelo CI (Regra III)
+          - task: DownloadBuildArtifacts@1
+            displayName: '1. Baixar Novo Artefato Publicado pelo CI (drop)'
+            inputs:
+              buildType: 'current'
+              downloadType: 'single'
+              artifactName: '$(ARTIFACT_NAME)'
+              downloadPath: '$(System.ArtifactsDirectory)'
 
-                # Passo 2: Validação segura das Variáveis Protegidas (Regra IV — sem expor segredos)
-                - script: |
-                    echo "=========================================================="
-                    echo "Iniciando Deploy Contínuo (CD) — Clyvo Vet Web v2"
-                    echo "Resource Group Alvo : $(AZURE_RESOURCE_GROUP)"
-                    echo "Azure Web App Alvo  : https://$(AZURE_WEBAPP_NAME).azurewebsites.net"
-                    echo "Profile Spring Boot : $(SPRING_PROFILES_ACTIVE) (PostgreSQL em Nuvem)"
-                    echo "Variáveis Protegidas: DB_URL, DB_USER, DB_PASSWORD, KUDU_USER, KUDU_PASSWORD (🔒)"
-                    echo "=========================================================="
-                    ls -lh $(System.ArtifactsDirectory)/$(ARTIFACT_NAME)/*.jar
-                  displayName: '2. Validar Artefato e Variáveis Protegidas (Secret Variables 🔒)'
+          # Passo 2: Validação segura das Variáveis Protegidas (Regra IV — sem expor segredos)
+          - script: |
+              echo "=========================================================="
+              echo "Iniciando Deploy Contínuo (CD) — Clyvo Vet Web v2"
+              echo "Resource Group Alvo : $(AZURE_RESOURCE_GROUP)"
+              echo "Azure Web App Alvo  : https://$(AZURE_WEBAPP_NAME).azurewebsites.net"
+              echo "Profile Spring Boot : prod (PostgreSQL em Nuvem)"
+              echo "Variáveis Protegidas: DB_URL, DB_USER, DB_PASSWORD, KUDU_USER, KUDU_PASSWORD (🔒)"
+              echo "=========================================================="
+              ls -lh $(System.ArtifactsDirectory)/$(ARTIFACT_NAME)/*.jar
+            displayName: '2. Validar Artefato e Variáveis Protegidas (Secret Variables 🔒)'
 
-                # Passo 3: Deploy Automatizado no Azure Web App (PaaS Linux Java 21) — Regra VII
-                - script: |
-                    set -e
-                    JAR_FILE=$(ls $(System.ArtifactsDirectory)/$(ARTIFACT_NAME)/*.jar | head -n 1)
-                    echo "Publicando artefato ${JAR_FILE} no Azure Web App $(AZURE_WEBAPP_NAME)..."
-                    HTTP_STATUS=$(curl -sS -o /tmp/deploy_resp.txt -w "%{http_code}" \
-                      -X POST \
-                      -u "$(KUDU_USER):$(KUDU_PASSWORD)" \
-                      -H "Content-Type: application/octet-stream" \
-                      --data-binary @"${JAR_FILE}" \
-                      "https://$(AZURE_WEBAPP_NAME).scm.azurewebsites.net/api/publish?type=jar&async=false")
-                    cat /tmp/deploy_resp.txt || true
-                    echo "Status HTTP do Deploy: ${HTTP_STATUS}"
-                    if [ "${HTTP_STATUS}" -lt 200 ] || [ "${HTTP_STATUS}" -ge 300 ]; then
-                      echo "Erro no deploy para o Azure Web App (HTTP ${HTTP_STATUS})"
-                      exit 1
-                    fi
-                    echo "✅ Deploy concluído com sucesso em: https://$(AZURE_WEBAPP_NAME).azurewebsites.net"
-                  displayName: '3. Deploy Automático do Artefato JAR no Azure Web App (Linux Java 21)'
+          # Passo 3: Deploy Automatizado no Azure Web App (PaaS Linux Java 21) — Regra VII
+          - script: |
+              set -e
+              JAR_FILE=$(ls $(System.ArtifactsDirectory)/$(ARTIFACT_NAME)/*.jar | grep -v "plain" | head -n 1)
+              echo "Publicando artefato ${JAR_FILE} no Azure Web App $(AZURE_WEBAPP_NAME)..."
+              HTTP_STATUS=$(curl -sS -o /tmp/deploy_resp.txt -w "%{http_code}" \
+                -X POST \
+                -u "$KUDU_USER:$KUDU_PASS" \
+                -H "Content-Type: application/octet-stream" \
+                --data-binary @"${JAR_FILE}" \
+                "https://$(AZURE_WEBAPP_NAME).scm.azurewebsites.net/api/publish?type=jar&async=false")
+              cat /tmp/deploy_resp.txt || true
+              echo ""
+              echo "Status HTTP do Deploy: ${HTTP_STATUS}"
+              if [ "${HTTP_STATUS}" -lt 200 ] || [ "${HTTP_STATUS}" -ge 300 ]; then
+                echo "Erro no deploy para o Azure Web App (HTTP ${HTTP_STATUS})"
+                exit 1
+              fi
+              echo "✅ Deploy concluído com sucesso em: https://$(AZURE_WEBAPP_NAME).azurewebsites.net"
+            displayName: '3. Deploy Automático do Artefato JAR no Azure Web App (Linux Java 21)'
+            env:
+              KUDU_USER: $(KUDU_USER)
+              KUDU_PASS: $(KUDU_PASSWORD)
+              DB_URL: $(DB_URL)
+              DB_USER: $(DB_USER)
+              DB_PASSWORD: $(DB_PASSWORD)
