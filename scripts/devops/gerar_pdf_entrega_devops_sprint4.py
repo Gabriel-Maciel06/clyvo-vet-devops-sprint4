@@ -26,7 +26,7 @@ YOUTUBE_URL = os.environ.get(
 )
 AZURE_DEVOPS_URL = os.environ.get(
     "AZURE_DEVOPS_URL",
-    "https://dev.azure.com/GabrielMaciel562795/Sprint%204%20%E2%80%93%20Azure%20DevOps",
+    "https://dev.azure.com/RM565160/Sprint%204%20%E2%80%93%20Azure%20DevOps",
 )
 
 HTML_CONTENT = f"""<!DOCTYPE html>

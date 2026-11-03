@@ -7,7 +7,7 @@
 set -euo pipefail
 
 RESOURCE_GROUP="${AZURE_RESOURCE_GROUP:-rg-clyvo-sprint4}"
-LOCATION="${AZURE_LOCATION:-eastus}"
+LOCATION="${AZURE_LOCATION:-canadacentral}"
 SUFIXO="${SUFIXO_RM:-rm562795}"
 APP_PLAN="plan-clyvo-sprint4-${SUFIXO}"
 WEBAPP_NAME="app-clyvo-vet-${SUFIXO}"
