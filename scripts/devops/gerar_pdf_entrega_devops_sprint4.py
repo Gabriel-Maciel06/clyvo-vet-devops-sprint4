@@ -19,7 +19,7 @@ PDF_OUTPUT = ROOT_DIR / "Entrega_DevOps_Sprint4_FIAP.pdf"
 HTML_TEMP = ROOT_DIR / "docs" / "devops" / "_temp_entrega_sprint4.html"
 
 GITHUB_URL = os.environ.get(
-    "GITHUB_URL", "https://github.com/Gabriel-Maciel06/clyvo-vet-web-v2"
+    "GITHUB_URL", "https://github.com/Gabriel-Maciel06/clyvo-vet-devops-sprint4"
 )
 YOUTUBE_URL = os.environ.get(
     "YOUTUBE_URL", "https://youtu.be/INSERIR_LINK_DO_VIDEO_AQUI"

@@ -72,7 +72,7 @@ Acesse [https://dev.azure.com](https://dev.azure.com) e clique em **New project*
 ---
 
 ### Passo 5 — Conectar a Pipeline (`azure-pipelines.yml`) na Branch `master`
-1. Vá em **Pipelines** $\rightarrow$ **Create Pipeline** $\rightarrow$ selecione **GitHub** (ou **Azure Repos Git**, caso tenha importado o repositório `https://github.com/Gabriel-Maciel06/clyvo-vet-web-v2.git` em *Repos*).
+1. Vá em **Pipelines** $\rightarrow$ **Create Pipeline** $\rightarrow$ selecione **GitHub** (ou **Azure Repos Git**, caso tenha importado o repositório `https://github.com/Gabriel-Maciel06/clyvo-vet-devops-sprint4.git` em *Repos*).
 2. Selecione o repositório `clyvo-vet-web-v2` $\rightarrow$ **Existing Azure Pipelines YAML file** $\rightarrow$ branch `master` $\rightarrow$ path `/azure-pipelines.yml`.
 3. Clique em **Save** (ou **Run** uma primeira vez antes de gravar para já deixar o cache aquecido e validar que ficou tudo verde!).
 

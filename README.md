@@ -147,7 +147,7 @@ O banco H2 em memória e as 15 migrações do Flyway sobem automaticamente sem n
 
 ### Passo a passo
 ```bash
-git clone https://github.com/Gabriel-Maciel06/clyvo-vet-web-v2.git
+git clone https://github.com/Gabriel-Maciel06/clyvo-vet-devops-sprint4.git
 cd clyvo-vet-web-v2
 
 mvn clean test        # Executa os 113 testes automatizados (100% verdes)
