@@ -41,7 +41,7 @@
 ## ☁️ DevOps Tools & Cloud Computing — 4ª Sprint (Azure DevOps & CI/CD)
 
 > **Professor:** Prof. João Menk (`profjoao.menk@fiap.com.br`)  
-> **Projeto no Azure DevOps:** `Sprint 4 – Azure DevOps` (Visibilidade: `Private` | Controle de Versão: `Git` | Processo: `Scrum` | Acesso do Professor: `Basic`)  
+> **Projeto no Azure DevOps:** [`PawCare`](https://dev.azure.com/RM565155/PawCare) (Organização: [`https://dev.azure.com/RM565155`](https://dev.azure.com/RM565155) | Project ID: `ebf5b987-cfae-490b-9b94-38a9915246bd` | Visibilidade: `Private` | Controle de Versão: `Git` | Processo: `Scrum` | Acesso do Professor: `Basic`)  
 > **Artefatos Diretos de DevOps:**  
 > - 📄 **PDF Obrigatório da Entrega:** [`Entrega_DevOps_Sprint4_FIAP.pdf`](Entrega_DevOps_Sprint4_FIAP.pdf)  
 > - ⚙️ **Pipeline CI/CD (YAML):** [`azure-pipelines.yml`](azure-pipelines.yml) *(Opção Azure Web App)* e [`docs/devops/azure-pipelines-aci.yml`](docs/devops/azure-pipelines-aci.yml) *(Opção Azure ACI)*  

@@ -71,7 +71,7 @@
   <rect x="25" y="18" width="1550" height="82" rx="14" fill="#0F172A" stroke="#334155" stroke-width="1.5" filter="url(#shadow)"/>
   <rect x="25" y="18" width="10" height="82" rx="5" fill="#0078D4"/>
   <text x="52" y="52" fill="#F8FAFC" font-size="22" font-weight="800" letter-spacing="0.2">CLYVO VET WEB v2 — ARQUITETURA EM NUVEM &amp; ESTEIRA CI/CD (AZURE DEVOPS)</text>
-  <text x="52" y="79" fill="#94A3B8" font-size="13.5" font-weight="500">FIAP • 4ª Sprint DevOps Tools &amp; Cloud Computing + Java Advanced • Turma 2TDSR • Projeto: Sprint 4 – Azure DevOps</text>
+  <text x="52" y="79" fill="#94A3B8" font-size="13.5" font-weight="500">FIAP • 4ª Sprint DevOps Tools &amp; Cloud Computing + Java Advanced • Turma 2TDSR • Projeto: PawCare (Org: RM565155)</text>
 
   <!-- Stack Badges in Header -->
   <g transform="translate(1070, 32)">
@@ -154,14 +154,14 @@
     <text x="76" y="90" fill="#94A3B8" font-size="10.5">Audita Repos, Pipelines e Boards</text>
 
     <rect x="12" y="104" width="255" height="56" rx="8" fill="#1E293B" stroke="#334155"/>
-    <text x="22" y="123" fill="#E2E8F0" font-size="11" font-weight="700">📋 Projeto: Sprint 4 – Azure DevOps</text>
+    <text x="22" y="123" fill="#E2E8F0" font-size="11" font-weight="700">📋 Projeto: PawCare</text>
     <text x="22" y="142" fill="#94A3B8" font-size="10.5">Visibility: Private • Git • Processo: Scrum</text>
   </g>
 
   <!-- ================= COLUMN 2: AZURE DEVOPS (CI/CD ENGINE) ================= -->
   <rect x="365" y="118" width="630" height="802" rx="16" fill="url(#azDevopsGrad)" stroke="#0284C7" stroke-width="2" filter="url(#shadow)"/>
   <rect x="365" y="118" width="630" height="44" rx="16" fill="#0369A1"/>
-  <text x="680" y="145" fill="#FFFFFF" font-size="15.5" font-weight="800" text-anchor="middle">🚀 AZURE DEVOPS ORGANIZATION — PROJECT: "Sprint 4 – Azure DevOps"</text>
+  <text x="680" y="145" fill="#FFFFFF" font-size="15.5" font-weight="800" text-anchor="middle">🚀 AZURE DEVOPS ORG: "RM565155" — PROJECT: "PawCare"</text>
 
   <!-- Sub-box 2.1: Git Repository -->
   <g transform="translate(388, 176)">

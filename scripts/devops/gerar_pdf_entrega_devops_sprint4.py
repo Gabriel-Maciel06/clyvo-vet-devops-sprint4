@@ -26,7 +26,7 @@ YOUTUBE_URL = os.environ.get(
 )
 AZURE_DEVOPS_URL = os.environ.get(
     "AZURE_DEVOPS_URL",
-    "https://dev.azure.com/RM565160/Sprint%204%20%E2%80%93%20Azure%20DevOps",
+    "https://dev.azure.com/RM565155/PawCare",
 )
 
 HTML_CONTENT = f"""<!DOCTYPE html>
@@ -118,7 +118,7 @@ HTML_CONTENT = f"""<!DOCTYPE html>
 <body>
   <div class="header">
     <h1>FIAP — DEVOPS TOOLS &amp; CLOUD COMPUTING (4ª SPRINT)</h1>
-    <p>Projeto: Sprint 4 – Azure DevOps | Professor: Prof. João Menk</p>
+    <p>Projeto: PawCare | Organização: RM565155 | Professor: Prof. João Menk</p>
   </div>
 
   <div class="section">
@@ -175,7 +175,7 @@ HTML_CONTENT = f"""<!DOCTYPE html>
     </div>
 
     <div class="link-box">
-      <span class="link-label">Link do Projeto no Azure DevOps (Sprint 4 – Azure DevOps):</span>
+      <span class="link-label">Link do Projeto no Azure DevOps (PawCare):</span>
       <a class="link-url" href="{AZURE_DEVOPS_URL}">{AZURE_DEVOPS_URL}</a>
     </div>
   </div>

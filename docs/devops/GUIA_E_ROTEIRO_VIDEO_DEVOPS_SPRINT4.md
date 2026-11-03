@@ -1,6 +1,6 @@
 # 🎬 Guia de Configuração Azure DevOps & Roteiro Oficial do Vídeo (80 Pontos)
 **Disciplina:** DevOps Tools & Cloud Computing — 4ª Sprint (FIAP 2026)  
-**Projeto:** `Sprint 4 – Azure DevOps` — **Clyvo Vet Web v2 (Java Advanced + PostgreSQL Cloud)**  
+**Projeto:** [`PawCare`](https://dev.azure.com/RM565155/PawCare) (Organização: [`https://dev.azure.com/RM565155`](https://dev.azure.com/RM565155) | Project ID: `ebf5b987-cfae-490b-9b94-38a9915246bd`) — **Clyvo Vet Web v2 (Java Advanced + PostgreSQL Cloud)**  
 **Professor:** Prof. João Menk (`profjoao.menk@fiap.com.br`)  
 **Turma:** `2TDSR`
 
@@ -22,8 +22,8 @@ O script criará automaticamente no Resource Group `rg-clyvo-sprint4`:
 ---
 
 ### Passo 2 — Criar o Projeto no Azure DevOps (Regra 4 do Slide 2)
-Acesse [https://dev.azure.com](https://dev.azure.com) e clique em **New project** preenchendo **exatamente**:
-- **Project name:** `Sprint 4 – Azure DevOps`
+Acesse [https://dev.azure.com/RM565155](https://dev.azure.com/RM565155) e clique em **New project** preenchendo **exatamente**:
+- **Project name:** `PawCare`
 - **Description:** *(copie e cole o bloco abaixo)*
   ```text
   Projeto para entrega da Sprint 4 do professor João Menk
@@ -45,13 +45,13 @@ Acesse [https://dev.azure.com](https://dev.azure.com) e clique em **New project*
 1. No menu raiz da sua Organização no Azure DevOps (canto inferior esquerdo), clique em **Organization settings** $\rightarrow$ **Users** $\rightarrow$ **Add users**.
 2. Em **Users**, digite o e-mail do professor: `profjoao.menk@fiap.com.br`
 3. Em **Access level**, selecione obrigatoriamente **`Basic`** *(NUNCA deixe como Stakeholder!)*.
-4. Marque **Add to projects** $\rightarrow$ selecione `Sprint 4 – Azure DevOps` $\rightarrow$ grupo **Project Administrators** (ou **Contributors**) $\rightarrow$ clique em **Add**.
+4. Marque **Add to projects** $\rightarrow$ selecione `PawCare` $\rightarrow$ grupo **Project Administrators** (ou **Contributors**) $\rightarrow$ clique em **Add**.
 
 ---
 
 ### Passo 4 — Criar a Service Connection e as Variáveis Protegidas (Regra IV — Evita -15 pts)
 1. **Service Connection com a Azure:**
-   - No projeto `Sprint 4 – Azure DevOps`, vá em **Project settings** $\rightarrow$ **Service connections** $\rightarrow$ **New service connection** $\rightarrow$ **Azure Resource Manager** $\rightarrow$ **Service principal (automatic)**.
+   - No projeto `PawCare`, vá em **Project settings** $\rightarrow$ **Service connections** $\rightarrow$ **New service connection** $\rightarrow$ **Azure Resource Manager** $\rightarrow$ **Service principal (automatic)**.
    - Selecione sua assinatura Azure, Resource Group `rg-clyvo-sprint4`, dê o nome **`azure-sprint4-connection`** e marque *Grant access permission to all pipelines*.
 2. **Variable Group com Cadeado (`clyvo-sprint4-secrets`):**
    - Vá em **Pipelines** $\rightarrow$ **Library** $\rightarrow$ **+ Variable group**.
@@ -82,7 +82,7 @@ Acesse [https://dev.azure.com](https://dev.azure.com) e clique em **New project*
 
 ### 📋 Deixe estas 5 janelas/abas abertas antes de apertar REC:
 1. **Aba 1 (Navegador):** Repositório GitHub / Azure DevOps com o `README.md` e o Diagrama de Arquitetura (`docs/devops/arquitetura-cicd-sprint4.png`).
-2. **Aba 2 (Navegador):** Azure DevOps (`Sprint 4 – Azure DevOps`) nas abas **Project Settings (Users/Permissions)**, **Pipelines > Library (`clyvo-sprint4-secrets`)** e **Pipelines**.
+2. **Aba 2 (Navegador):** Azure DevOps (`PawCare` — `https://dev.azure.com/RM565155/PawCare`) nas abas **Project Settings (Users/Permissions)**, **Pipelines > Library (`clyvo-sprint4-secrets`)** e **Pipelines**.
 3. **Aba 3 (Navegador):** **Portal do Azure** (`rg-clyvo-sprint4`) mostrando o **Azure Web App (`app-clyvo-vet-rm562795`)** e o **Banco de Dados PostgreSQL (`pg-clyvo-vet-rm562795`)**.
 4. **Aba 4 (Navegador):** A aplicação aberta na URL pública da Azure (`https://app-clyvo-vet-rm562795.azurewebsites.net/login`). *(Zero localhost!)*
 5. **Janela 5 (IDE + Cliente SQL):** VS Code / IntelliJ com o código aberto + **DBeaver / Azure Data Studio / Terminal `psql`** conectado ao PostgreSQL da Azure com o arquivo [`docs/devops/EVIDENCIAS_CRUD_BANCO_NUVEM.sql`](EVIDENCIAS_CRUD_BANCO_NUVEM.sql) aberto.
@@ -96,7 +96,7 @@ Acesse [https://dev.azure.com](https://dev.azure.com) e clique em **New project*
    - Aponte o mouse para o **Diagrama de Arquitetura + Fluxo CI/CD**:
      > *"Neste diagrama apresentamos as personas (Desenvolvedor, Usuário Final e Professor Avaliador), todas as ferramentas da stack e o fluxo numerado de 1 a 10 da nossa esteira CI/CD no Azure DevOps até o deploy no Azure Web App e persistência no PostgreSQL em nuvem."*
 2. **Mostre a configuração do Projeto no Azure DevOps:**
-   - Mostre o nome do projeto **`Sprint 4 – Azure DevOps`**, a descrição com o nome do professor e os RMs da turma `2TDSR`, visibilidade **Private**, **Git** e processo **Scrum**.
+   - Mostre a organização **`RM565155`**, o nome do projeto **`PawCare`**, a descrição com o nome do professor e os RMs da turma `2TDSR`, visibilidade **Private**, **Git** e processo **Scrum**.
    - Abra **Organization Settings > Users** (ou **Project Settings > Permissions**) e mostre que o professor foi convidado com nível de acesso **`Basic`**.
 
 ---

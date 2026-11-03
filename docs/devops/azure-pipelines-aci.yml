@@ -1,6 +1,6 @@
 # ==============================================================================
 # FIAP — 4ª SPRINT: DEVOPS TOOLS & CLOUD COMPUTING (OPÇÃO ALTERNATIVA: ACR + ACI)
-# Projeto: Sprint 4 – Azure DevOps (Clyvo Vet Web v2)
+# Projeto: PawCare (https://dev.azure.com/RM565155/PawCare) — Clyvo Vet Web v2
 # Use este arquivo caso prefira provisionar no Azure Container Instance (ACI)
 # em vez do Azure Web App (ambos são oficialmente aceitos na Regra VII).
 # ==============================================================================
