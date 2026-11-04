@@ -154,7 +154,7 @@ stages:
                 -H "Authorization: Basic ${KUDU_AUTH_B64}" \
                 -H "Content-Type: application/octet-stream" \
                 --data-binary @"${JAR_FILE}" \
-                "https://$(AZURE_WEBAPP_NAME).scm.azurewebsites.net/api/publish?type=jar&async=false")
+                "https://$(AZURE_WEBAPP_NAME).scm.azurewebsites.net/api/publish?type=jar&async=false&restart=true")
               cat /tmp/deploy_resp.txt || true
               echo ""
               echo "Status HTTP do Deploy: ${HTTP_STATUS}"
