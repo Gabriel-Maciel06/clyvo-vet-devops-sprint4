@@ -2,7 +2,8 @@
 **Disciplina:** DevOps Tools & Cloud Computing — 4ª Sprint (FIAP 2026)  
 **Projeto:** [`PawCare`](https://dev.azure.com/RM565155/PawCare) (Organização: [`https://dev.azure.com/RM565155`](https://dev.azure.com/RM565155) | Project ID: `ebf5b987-cfae-490b-9b94-38a9915246bd`) — **Clyvo Vet Web v2 (Java Advanced + PostgreSQL Cloud)**  
 **Professor:** Prof. João Menk (`profjoao.menk@fiap.com.br`)  
-**Turma:** `2TDSR`
+**Turma:** `2TDSR`  
+🎥 **Vídeo Gravado da Demonstração CI/CD (YouTube):** [https://youtu.be/aEN74m5upE8](https://youtu.be/aEN74m5upE8)
 
 ---
 

@@ -22,7 +22,7 @@ GITHUB_URL = os.environ.get(
     "GITHUB_URL", "https://github.com/Gabriel-Maciel06/clyvo-vet-devops-sprint4"
 )
 YOUTUBE_URL = os.environ.get(
-    "YOUTUBE_URL", "https://youtu.be/INSERIR_LINK_DO_VIDEO_AQUI"
+    "YOUTUBE_URL", "https://youtu.be/aEN74m5upE8"
 )
 AZURE_DEVOPS_URL = os.environ.get(
     "AZURE_DEVOPS_URL",

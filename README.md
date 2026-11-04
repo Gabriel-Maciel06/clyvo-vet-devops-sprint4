@@ -9,6 +9,7 @@
 [![Microsoft Azure](https://img.shields.io/badge/Microsoft%20Azure-Web%20App%20%2B%20PostgreSQL%20Cloud-0089D6?style=for-the-badge&logo=microsoftazure&logoColor=white)](scripts/devops/provision-azure-webapp-postgres.sh)
 [![Flyway](https://img.shields.io/badge/Flyway-15%20Migrations%20(3FN)-CC0200?style=for-the-badge&logo=flyway&logoColor=white)](https://flywaydb.org/)
 [![Tests](https://img.shields.io/badge/Tests-113%20JUnit%20%2B%20Playwright%20E2E-0d9488?style=for-the-badge&logo=junit5&logoColor=white)](#-testes-automatizados-113-testes--e2e-playwright)
+[![Vídeo no YouTube](https://img.shields.io/badge/YouTube-Vídeo%20DevOps%20CI%2FCD-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/aEN74m5upE8)
 
 <p align="center">
   <a href="#-integrantes-do-grupo-turma-2tdsr">Integrantes</a> •
@@ -18,6 +19,7 @@
   <a href="#-como-executar-localmente">Como Executar</a> •
   <a href="#-arquitetura--decisões-de-design">Arquitetura</a> •
   <a href="#-testes-automatizados-113-testes--e2e-playwright">Testes</a> •
+  <a href="https://youtu.be/aEN74m5upE8"><b>🎥 Vídeo DevOps (YouTube)</b></a> •
   <a href="docs/ROTEIRO_GRAVACAO_VIDEO.md"><b>🎬 Roteiro Java (15 min)</b></a> •
   <a href="docs/devops/GUIA_E_ROTEIRO_VIDEO_DEVOPS_SPRINT4.md"><b>🚀 Roteiro DevOps (CI/CD)</b></a>
 </p>
@@ -43,6 +45,7 @@
 > **Professor:** Prof. João Menk (`profjoao.menk@fiap.com.br`)  
 > **Projeto no Azure DevOps:** [`PawCare`](https://dev.azure.com/RM565155/PawCare) (Organização: [`https://dev.azure.com/RM565155`](https://dev.azure.com/RM565155) | Project ID: `ebf5b987-cfae-490b-9b94-38a9915246bd` | Visibilidade: `Private` | Controle de Versão: `Git` | Processo: `Scrum` | Acesso do Professor: `Basic`)  
 > **Artefatos Diretos de DevOps:**  
+> - 🎥 **Vídeo Oficial de Demonstração (YouTube):** [https://youtu.be/aEN74m5upE8](https://youtu.be/aEN74m5upE8)  
 > - 📄 **PDF Obrigatório da Entrega:** [`Entrega_DevOps_Sprint4_FIAP.pdf`](Entrega_DevOps_Sprint4_FIAP.pdf)  
 > - ⚙️ **Pipeline CI/CD (YAML):** [`azure-pipelines.yml`](azure-pipelines.yml) *(Opção Azure Web App)* e [`docs/devops/azure-pipelines-aci.yml`](docs/devops/azure-pipelines-aci.yml) *(Opção Azure ACI)*  
 > - 🗺️ **Diagrama de Arquitetura + Fluxo CI/CD:** [`docs/devops/arquitetura-cicd-sprint4.png`](docs/devops/arquitetura-cicd-sprint4.png)  
